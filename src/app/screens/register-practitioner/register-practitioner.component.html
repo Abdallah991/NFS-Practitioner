@@ -1,0 +1,172 @@
+<div class="page-container">
+  <div class="sidebox">
+    <!-- class="loginBox" -->
+    <div>
+      <form
+        class="LoginDetails"
+        (keydown.enter)="$event.preventDefault()"
+        (ngSubmit)="onSubmit()"
+        #fe="ngForm"
+      >
+        <h1 class="center-alight">Register as Practitioner</h1>
+
+        <div class="top-view">
+          <div class="uploadfilecontainer">
+            <label for="fname">Photo</label>
+            <app-drop-zone (fileEmmitor)="setfile($event)"></app-drop-zone>
+          </div>
+          <div class="top-fields">
+            <label for="fname">First name</label>
+            <br />
+
+            <input
+              type="text"
+              name="firstName"
+              class="textbox-top moveDown"
+              [(ngModel)]="firstName"
+            /><br />
+            <br />
+            <label for="fname">Last name</label>
+            <br />
+            <input
+              type="text"
+              name="lastName"
+              class="textbox-top moveDown"
+              [(ngModel)]="firstName"
+            /><br />
+          </div>
+        </div>
+        <!-- (fileEmmitor)="setfile($event)" -->
+        <div class="bottom-fields">
+          <div>
+            <label for="fname">Email</label><br />
+            <input
+              type="text"
+              name="Email"
+              class="textbox-top moveDown"
+              [(ngModel)]="email"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="fname">Phone</label><br />
+            <input
+              type="text"
+              name="Email"
+              class="textbox-top moveDown"
+              [(ngModel)]="phone"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="fname">Speciality</label><br />
+            <input
+              type="text"
+              name="Email"
+              class="textbox-top moveDown"
+              [(ngModel)]="specialty"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="fname">Experience</label><br />
+            <input
+              type="text"
+              name="Email"
+              class="textbox-top moveDown"
+              [(ngModel)]="experience"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="fname">About</label><br />
+            <input
+              type="text"
+              name="Email"
+              class="textbox-top moveDown"
+              [(ngModel)]="experience"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="fname">Education</label><br />
+            <input
+              type="text"
+              name="Email"
+              class="textbox-top moveDown"
+              [(ngModel)]="experience"
+            />
+          </div>
+          <br />
+          <div>
+            <label for="fname">Price Per Session</label><br />
+            <input
+              type="text"
+              name="Email"
+              class="textbox-top moveDown"
+              [(ngModel)]="experience"
+            />
+          </div>
+          <br />
+
+          <!--
+        <label for="fname">Phone</label>
+        <br />
+        <input
+          type="text"
+          name="text"
+          class="textbox moveDown"
+          [(ngModel)]="phone"
+        /><br />
+        <label for="fname">Speciality</label><br />
+        <input
+          type="text"
+          name="speciality"
+          class="textbox moveDown"
+          [(ngModel)]="specialty"
+        /><br />
+        <label for="fname">Experience</label><br />
+        <input
+          type="text"
+          name="experience"
+          class="textbox moveDown"
+          [(ngModel)]="experience"
+        /><br />
+        <label for="fname">Education</label><br />
+        <input
+          type="text"
+          name="education"
+          class="textbox moveDown"
+          [(ngModel)]="education"
+        /><br />
+        <label for="fname">Price per session</label><br />
+        <input
+          type="text"
+          name="price"
+          class="textbox moveDown"
+          [(ngModel)]="price"
+        /><br />
+        <label for="fname">Languages</label><br />
+        <input
+          type="text"
+          name="languages"
+          class="textbox moveDown"
+          [(ngModel)]="languages"
+        /><br />
+
+        <label for="lname">Password</label><br />
+
+        <input
+          type="password"
+          name="Password"
+          class="textbox moveDown"
+          [(ngModel)]="password"
+        /><br /><br /> -->
+          <!-- <button type="submit" class="button">log in</button> -->
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="page-content-container"></div>
+</div>

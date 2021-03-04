@@ -1,0 +1,17 @@
+<div
+  class="uploadfilecontainer"
+  (click)="fileInput.click()"
+  appDropZone
+  (onFileDropped)="uploadFile($event)"
+  [ngStyle]="{
+    'background-image': 'url(' + Image + ')',
+    'background-size': size
+  }"
+>
+  <input hidden type="file" #fileInput (change)="uploadFile($event)" required />
+
+  <div class="textdrop">
+    <p>Drag and Drop Image or Browse</p>
+    <p>File name: {{ ab }}</p>
+  </div>
+</div>

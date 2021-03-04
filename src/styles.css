@@ -1,0 +1,45 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins";
+}
+
+h1,
+h2,
+h3 {
+  color: rgb(111, 98, 169);
+}
+
+.snackbar {
+  background: #ffffff;
+  height: 65px;
+  text-align: center;
+  color: rgba(111, 98, 169);
+  font-weight: 700;
+  font-family: "Poppins";
+}
+
+.snackbarError {
+  background: #ffffff;
+  height: 65px;
+  text-align: center;
+  color: rgb(234, 84, 87);
+  font-weight: 700;
+  font-family: "Poppins";
+}
+
+input[type="text"] {
+  padding: 12px 20px;
+}
+
+input[type="password"] {
+  padding: 12px 20px;
+}
+
+.dialogueBackDrop {
+  border-radius: 100px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

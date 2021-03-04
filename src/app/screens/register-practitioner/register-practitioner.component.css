@@ -1,0 +1,204 @@
+.page-container {
+  display: flex;
+  height: 100%;
+  background: rgb(111, 98, 169);
+}
+.page-content-container {
+  width: 100%;
+  background-image: url("../../../assets/nfsWallpaper.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+}
+
+.sidebox {
+  height: 100%;
+  width: 50%;
+  background: white;
+  min-width: 900px;
+}
+
+/* .loginBox {
+  /* display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%; */
+/* } */
+
+.top-view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  /* align-content: stretch; */
+}
+
+.top-fields {
+  margin-left: 20px;
+  flex: 1;
+}
+
+.button {
+  background-color: #6f62a9;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Poppins";
+  cursor: pointer;
+  border-radius: 30px;
+  width: 180px;
+}
+
+.textbox-top {
+  width: 80%;
+  height: 20px;
+  border-radius: 25px;
+  border: 0.8px solid rgba(111, 98, 169, 0.529);
+  outline: none;
+}
+
+.button {
+  margin: 0% 30%;
+}
+
+label {
+  margin-left: 10px;
+  color: #757575;
+}
+
+.uploadfilecontainer {
+  flex: 1;
+  margin-left: 20px;
+  width: 400px;
+  height: 400px;
+}
+.bottom-fields {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-fields div {
+  width: 100%;
+  padding-left: 10%;
+}
+/* .textbox {
+  width: 400px;
+  height: 20px;
+  border-radius: 25px;
+  border: 0.8px solid rgba(111, 98, 169, 0.529);
+  outline: none;
+} */
+
+/* 
+.sidebox {
+  height: 100%;
+  width: 50%;
+  background: white;
+  min-width: 900px;
+}
+
+.loginBox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  color: rgb(111, 98, 169);
+}
+.top-view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.uploadfilecontainer {
+  width: 400px;
+  height: 400px;
+}
+.top-fields {
+  width: 400px;
+  height: 400px;
+}
+label {
+  margin: 10px;
+  color: #757575;
+}
+
+.page-content-container {
+  width: 100%;
+  background-image: url("../../../assets/nfsWallpaper.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+}
+
+.textbox-top {
+  width: 80%;
+  height: 20px;
+  border-radius: 25px;
+  border: 0.8px solid rgba(111, 98, 169, 0.529);
+  outline: none;
+}
+.textbox {
+  width: 400px;
+  height: 20px;
+  border-radius: 25px;
+  border: 0.8px solid rgba(111, 98, 169, 0.529);
+  outline: none;
+}
+
+.center-alight {
+  text-align: center;
+}
+
+.LoginDetails {
+  width: 100%;
+  margin: 0 auto;
+  float: left;
+  overflow: auto;
+  position: relative;
+  display: block;
+  padding-top: 10%;
+  padding-left: 5%;
+}
+
+.logo {
+  background-color: black;
+  height: 50;
+  width: 50;
+}
+
+.button {
+  margin: 0% 30%;
+}
+
+.moveDown {
+  margin: 0 0 6% 0;
+}
+
+.button {
+  background-color: #6f62a9;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Poppins";
+  cursor: pointer;
+  border-radius: 30px;
+  width: 180px;
+  height: 40px;
+} */
