@@ -3,12 +3,11 @@
     <!-- class="loginBox" -->
     <div>
       <form
-        class="LoginDetails"
         (keydown.enter)="$event.preventDefault()"
         (ngSubmit)="onSubmit()"
         #fe="ngForm"
       >
-        <h1 class="center-alight">Register as Practitioner</h1>
+        <h1 class="center-align">Register as Practitioner!</h1>
 
         <div class="top-view">
           <div class="uploadfilecontainer">
@@ -16,13 +15,25 @@
             <app-drop-zone (fileEmmitor)="setfile($event)"></app-drop-zone>
           </div>
           <div class="top-fields">
-            <label for="fname">First name</label>
+            <label for="fname">Title</label>
             <br />
 
+            <select
+              class="selectbox textbox-top"
+              ngModel
+              name="Specailty"
+              required
+            >
+              <option *ngFor="let title of titles" value="{{ title }}">
+                {{ title }}
+              </option></select
+            ><br />
+            <br />
+            <label for="fname">First name</label>
             <input
               type="text"
               name="firstName"
-              class="textbox-top moveDown"
+              class="textbox-top"
               [(ngModel)]="firstName"
             /><br />
             <br />
@@ -31,9 +42,26 @@
             <input
               type="text"
               name="lastName"
-              class="textbox-top moveDown"
-              [(ngModel)]="firstName"
+              class="textbox-top"
+              [(ngModel)]="lastName"
             /><br />
+            <br />
+            <label for="Gender">Gender</label><br />
+            <br />
+            <div *ngFor="let gender of genders" class="gender-selection">
+              <label for="male">
+                <input
+                  value="{{ gender }}"
+                  type="radio"
+                  name="gender"
+                  class="gender-radio"
+                  ngModel
+                  [value]="gender"
+                  required
+                />
+                {{ gender }}
+              </label>
+            </div>
           </div>
         </div>
         <!-- (fileEmmitor)="setfile($event)" -->
@@ -43,126 +71,176 @@
             <input
               type="text"
               name="Email"
-              class="textbox-top moveDown"
+              class="textbox-bottom"
               [(ngModel)]="email"
             />
           </div>
           <br />
-          <div>
-            <label for="fname">Phone</label><br />
-            <input
-              type="text"
-              name="Email"
-              class="textbox-top moveDown"
-              [(ngModel)]="phone"
-            />
+          <div class="phone-container">
+            <div class="country-code">
+              <label for="fname">Phone</label><br />
+              <select
+                class="selectbox textbox-top"
+                ngModel
+                name="countryCode"
+                required
+              >
+                <option
+                  *ngFor="let countrycode of countryCodes"
+                  value="{{ countrycode }}"
+                >
+                  {{ countrycode }}
+                </option>
+              </select>
+            </div>
+            <div class="phone-number">
+              <br />
+              <input
+                type="text"
+                name="Email"
+                class="textbox-top"
+                [(ngModel)]="phone"
+              />
+            </div>
           </div>
           <br />
           <div>
             <label for="fname">Speciality</label><br />
-            <input
-              type="text"
-              name="Email"
-              class="textbox-top moveDown"
-              [(ngModel)]="specialty"
-            />
+            <select
+              class="selectbox textbox-top"
+              ngModel
+              name="speciality"
+              required
+            >
+              <option
+                *ngFor="let speciality of specialties"
+                value="{{ speciality }}"
+              >
+                {{ speciality }}
+              </option>
+            </select>
           </div>
           <br />
           <div>
-            <label for="fname">Experience</label><br />
-            <input
-              type="text"
-              name="Email"
-              class="textbox-top moveDown"
-              [(ngModel)]="experience"
-            />
+            <label for="fname">Sub-Categories</label><br />
+            <select
+              class="selectbox textbox-top"
+              ngModel
+              name="speciality"
+              required
+            >
+              <option
+                *ngFor="let subCategory of subCategories"
+                value="{{ subCategory }}"
+              >
+                {{ subCategory }}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div>
+            <label for="fname"
+              >Experience
+              <span class="input-note"
+                >*No more than 500 characters recommended.</span
+              > </label
+            ><br />
+            <textarea
+              class="largetextbox"
+              rows="3"
+              name="Experience"
+              ngModel
+              required
+            ></textarea>
           </div>
           <br />
           <div>
             <label for="fname">About</label><br />
+            <textarea
+              class="largetextbox"
+              rows="3"
+              name="About"
+              ngModel
+              required
+            ></textarea>
+          </div>
+          <br />
+          <div>
+            <label for="fname"
+              >Education
+              <span class="input-note"
+                >*No more than 500 characters recommended.</span
+              > </label
+            ><br />
+            <textarea
+              class="largetextbox"
+              rows="3"
+              name="Education"
+              ngModel
+              required
+            ></textarea>
+          </div>
+          <br />
+          <div>
+            <label for="fname"
+              >Price Per Session
+              <span class="input-note">
+                *This will not be displayed in the app.
+              </span> </label
+            ><br />
             <input
               type="text"
               name="Email"
-              class="textbox-top moveDown"
+              class="textbox-bottom"
               [(ngModel)]="experience"
             />
           </div>
           <br />
           <div>
-            <label for="fname">Education</label><br />
+            <br />
+            <label for="fname">Languages</label><br />
+            <select
+              class="selectbox textbox-top"
+              ngModel
+              name="languages"
+              required
+            >
+              <option *ngFor="let language of Languages" value="{{ language }}">
+                {{ language }}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div class="upload-certificate-container">
+            <label for="fname">Certification and licenses </label>
+            <app-drop-zone (fileEmmitor)="setfile($event)"></app-drop-zone>
+          </div>
+          <br />
+          <br />
+          <br />
+
+          <div>
+            <label for="fname">Location name </label><br />
             <input
               type="text"
-              name="Email"
-              class="textbox-top moveDown"
-              [(ngModel)]="experience"
+              name="locationName"
+              class="textbox-bottom"
+              [(ngModel)]="locationName"
             />
           </div>
+          <br />
           <br />
           <div>
-            <label for="fname">Price Per Session</label><br />
-            <input
-              type="text"
-              name="Email"
-              class="textbox-top moveDown"
-              [(ngModel)]="experience"
-            />
+            <input type="checkbox" name="terms" class="terms-checkbox" />
+            <label for="fname"
+              >By Applying you agree to the
+              <span class="terms-link">terms and conditions</span> and guarantee
+              that all the information is true and valid.</label
+            >
           </div>
           <br />
-
-          <!--
-        <label for="fname">Phone</label>
-        <br />
-        <input
-          type="text"
-          name="text"
-          class="textbox moveDown"
-          [(ngModel)]="phone"
-        /><br />
-        <label for="fname">Speciality</label><br />
-        <input
-          type="text"
-          name="speciality"
-          class="textbox moveDown"
-          [(ngModel)]="specialty"
-        /><br />
-        <label for="fname">Experience</label><br />
-        <input
-          type="text"
-          name="experience"
-          class="textbox moveDown"
-          [(ngModel)]="experience"
-        /><br />
-        <label for="fname">Education</label><br />
-        <input
-          type="text"
-          name="education"
-          class="textbox moveDown"
-          [(ngModel)]="education"
-        /><br />
-        <label for="fname">Price per session</label><br />
-        <input
-          type="text"
-          name="price"
-          class="textbox moveDown"
-          [(ngModel)]="price"
-        /><br />
-        <label for="fname">Languages</label><br />
-        <input
-          type="text"
-          name="languages"
-          class="textbox moveDown"
-          [(ngModel)]="languages"
-        /><br />
-
-        <label for="lname">Password</label><br />
-
-        <input
-          type="password"
-          name="Password"
-          class="textbox moveDown"
-          [(ngModel)]="password"
-        /><br /><br /> -->
-          <!-- <button type="submit" class="button">log in</button> -->
+          <br />
+          <button type="submit" class="button">Submit</button>
         </div>
       </form>
     </div>

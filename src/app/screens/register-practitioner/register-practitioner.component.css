@@ -2,6 +2,7 @@
   display: flex;
   height: 100%;
   background: rgb(111, 98, 169);
+  box-sizing: border-box !important;
 }
 .page-content-container {
   width: 100%;
@@ -12,20 +13,20 @@
   display: flex;
 }
 
+/*  */
+/* side box container */
 .sidebox {
   height: 100%;
   width: 50%;
   background: white;
   min-width: 900px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0px;
+  padding: 5%;
 }
 
-/* .loginBox {
-  /* display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100%; */
-/* } */
-
+/* top container */
 .top-view {
   display: flex;
   flex-wrap: wrap;
@@ -34,159 +35,123 @@
   height: 500px;
   /* align-content: stretch; */
 }
-
+/* top right container */
 .top-fields {
-  margin-left: 20px;
+  padding: 5%;
   flex: 1;
+  justify-self: center;
 }
 
-.button {
-  background-color: #6f62a9;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: "Poppins";
-  cursor: pointer;
-  border-radius: 30px;
-  width: 180px;
-}
-
+/* text box in top right */
 .textbox-top {
-  width: 80%;
+  width: 90%;
   height: 20px;
   border-radius: 25px;
-  border: 0.8px solid rgba(111, 98, 169, 0.529);
+  border: 0.8px solid #ebe8f2;
   outline: none;
 }
-
-.button {
-  margin: 0% 30%;
-}
-
+/* label above the text box */
 label {
   margin-left: 10px;
   color: #757575;
 }
 
+/* file container, restirction of height to be above 400px */
 .uploadfilecontainer {
   flex: 1;
-  margin-left: 20px;
   width: 400px;
   height: 400px;
 }
+/* this needs to be another container */
+.upload-certificate-container {
+  flex: 1;
+  width: 100% !important;
+  height: 400px;
+}
+
+/*  bottom container */
 .bottom-fields {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+/*  divs inside bottom container */
 
 .bottom-fields div {
   width: 100%;
-  padding-left: 10%;
 }
-/* .textbox {
-  width: 400px;
+/* text box inside the bottom container */
+.textbox-bottom {
+  width: 95%;
   height: 20px;
   border-radius: 25px;
-  border: 0.8px solid rgba(111, 98, 169, 0.529);
+  border: 0.8px solid #ebe8f2;
   outline: none;
-} */
-
-/* 
-.sidebox {
-  height: 100%;
-  width: 50%;
-  background: white;
-  min-width: 900px;
 }
 
-.loginBox {
-  display: flex;
-  flex-wrap: wrap;
+/* select box  */
+.selectbox {
+  height: 50px;
   width: 100%;
-  height: 100%;
-}
-
-h1 {
-  color: rgb(111, 98, 169);
-}
-.top-view {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.uploadfilecontainer {
-  width: 400px;
-  height: 400px;
-}
-.top-fields {
-  width: 400px;
-  height: 400px;
-}
-label {
-  margin: 10px;
-  color: #757575;
-}
-
-.page-content-container {
-  width: 100%;
-  background-image: url("../../../assets/nfsWallpaper.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-}
-
-.textbox-top {
-  width: 80%;
-  height: 20px;
   border-radius: 25px;
-  border: 0.8px solid rgba(111, 98, 169, 0.529);
-  outline: none;
-}
-.textbox {
-  width: 400px;
-  height: 20px;
-  border-radius: 25px;
-  border: 0.8px solid rgba(111, 98, 169, 0.529);
+  border: 0.8px solid #ebe8f2;
   outline: none;
 }
 
-.center-alight {
+/* geneder selection div */
+.gender-selection {
+  display: inline-flex;
+  /* flex-direction: row; */
+}
+/* radio input */
+.gender-radio {
+  background-color: #6f62a9;
+}
+
+/* title aliging */
+.center-align {
   text-align: center;
 }
 
-.LoginDetails {
+/* phone div */
+.phone-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+/* country code div */
+.country-code {
+  flex: 1;
+}
+/* phone number div */
+.phone-number {
+  flex: 3;
+}
+/* textarea styling */
+.largetextbox {
   width: 100%;
-  margin: 0 auto;
-  float: left;
-  overflow: auto;
-  position: relative;
-  display: block;
-  padding-top: 10%;
-  padding-left: 5%;
+  height: 100px;
+  border-radius: 25px;
+  border: 0.8px solid #ebe8f2;
+  outline: none;
+  font-family: "Poppins";
+  box-sizing: border-box !important;
 }
 
-.logo {
-  background-color: black;
-  height: 50;
-  width: 50;
+/* text area note */
+.input-note {
+  font-size: 8pt;
+  margin-left: 10px;
 }
 
-.button {
-  margin: 0% 30%;
+/* terms and conditions link */
+.terms-link {
+  font-size: 12pt;
+  color: #6f62a9;
 }
 
-.moveDown {
-  margin: 0 0 6% 0;
-}
-
+/* Button */
 .button {
   background-color: #6f62a9;
   border: none;
@@ -198,7 +163,8 @@ label {
   font-weight: 500;
   font-family: "Poppins";
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 20px;
   width: 180px;
   height: 40px;
-} */
+  margin: 0% 30%;
+}

@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, NgForm, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormControl, NgForm, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-register-practitioner',
-  templateUrl: './register-practitioner.component.html',
-  styleUrls: ['./register-practitioner.component.css'],
+  selector: "app-register-practitioner",
+  templateUrl: "./register-practitioner.component.html",
+  styleUrls: ["./register-practitioner.component.css"],
 })
 export class RegisterPractitionerComponent implements OnInit {
-  @ViewChild('fe')
+  @ViewChild("fe")
   editDoctorForm!: NgForm;
 
   constructor(public fb: FormBuilder) {}
+  title: any;
   firstName: any;
   lastName: any;
   email: any;
@@ -20,7 +21,20 @@ export class RegisterPractitionerComponent implements OnInit {
   education: any;
   price: any;
   languages: any;
+  locationName: any;
   filesAvailable: boolean = false;
+  titles = ["Dr.", "Ms.", "Mrs.", "Mr"];
+  genders = ["Male", "Female"];
+  countryCodes = ["BH", "USA", "FA"];
+  specialties = [
+    "Psychology",
+    "Psychiatry",
+    "Behavioral Therapy",
+    "Alternative Healing",
+    "Counselor",
+  ];
+  subCategories = ["Musical Therapy", "Cocoa Therapy", "Chocolate Therapy"];
+  Languages = ["Arabic", "English"];
 
   ngOnInit(): void {}
 
