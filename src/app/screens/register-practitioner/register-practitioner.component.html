@@ -1,27 +1,25 @@
 <div class="page-container">
   <div class="sidebox">
-    <!-- class="loginBox" -->
     <div>
-      <form
-        (keydown.enter)="$event.preventDefault()"
-        (ngSubmit)="onSubmit()"
-        #fe="ngForm"
-      >
+      <form [formGroup]="RegisterPractitioner">
         <h1 class="center-align">Register as Practitioner!</h1>
-
+        <!-- top view -->
         <div class="top-view">
+          <!-- Image upload -->
+
           <div class="uploadfilecontainer">
-            <label for="fname">Photo</label>
+            <label>Photo</label>
             <app-drop-zone (fileEmmitor)="setfile($event)"></app-drop-zone>
           </div>
+          <!-- Title, first name, last name, Gender-->
+
           <div class="top-fields">
-            <label for="fname">Title</label>
+            <label>Title</label>
             <br />
 
             <select
               class="selectbox textbox-top"
-              ngModel
-              name="Specailty"
+              formControlName="title"
               required
             >
               <option *ngFor="let title of titles" value="{{ title }}">
@@ -29,12 +27,13 @@
               </option></select
             ><br />
             <br />
-            <label for="fname">First name</label>
+
+            <label>First name</label>
             <input
               type="text"
               name="firstName"
               class="textbox-top"
-              [(ngModel)]="firstName"
+              formControlName="firstName"
             /><br />
             <br />
             <label for="fname">Last name</label>
@@ -43,20 +42,19 @@
               type="text"
               name="lastName"
               class="textbox-top"
-              [(ngModel)]="lastName"
+              formControlName="lastName"
             /><br />
             <br />
             <label for="Gender">Gender</label><br />
             <br />
             <div *ngFor="let gender of genders" class="gender-selection">
-              <label for="male">
+              <label>
                 <input
                   value="{{ gender }}"
                   type="radio"
                   name="gender"
                   class="gender-radio"
-                  ngModel
-                  [value]="gender"
+                  formControlName="gender"
                   required
                 />
                 {{ gender }}
@@ -64,15 +62,15 @@
             </div>
           </div>
         </div>
-        <!-- (fileEmmitor)="setfile($event)" -->
+        <!-- Email, phone, specialty, sub-categries .... etc-->
         <div class="bottom-fields">
           <div>
-            <label for="fname">Email</label><br />
+            <label>Email</label><br />
             <input
-              type="text"
+              type="email"
               name="Email"
               class="textbox-bottom"
-              [(ngModel)]="email"
+              formControlName="email"
             />
           </div>
           <br />
@@ -80,8 +78,7 @@
             <div class="country-code">
               <label for="fname">Phone</label><br />
               <select
-                class="selectbox textbox-top"
-                ngModel
+                class="selectbox textbox-bottom"
                 name="countryCode"
                 required
               >
@@ -96,20 +93,19 @@
             <div class="phone-number">
               <br />
               <input
-                type="text"
+                type="number"
                 name="Email"
-                class="textbox-top"
-                [(ngModel)]="phone"
+                class="textbox-bottom"
+                formControlName="phone"
               />
             </div>
           </div>
           <br />
           <div>
-            <label for="fname">Speciality</label><br />
+            <label>Specialty</label><br />
             <select
-              class="selectbox textbox-top"
-              ngModel
-              name="speciality"
+              class="selectbox textbox-bottom"
+              formControlName="specialty"
               required
             >
               <option
@@ -122,11 +118,10 @@
           </div>
           <br />
           <div>
-            <label for="fname">Sub-Categories</label><br />
+            <label>Sub-Categories</label><br />
             <select
-              class="selectbox textbox-top"
-              ngModel
-              name="speciality"
+              class="selectbox textbox-bottom"
+              formControlName="subCategory"
               required
             >
               <option
@@ -139,7 +134,7 @@
           </div>
           <br />
           <div>
-            <label for="fname"
+            <label
               >Experience
               <span class="input-note"
                 >*No more than 500 characters recommended.</span
@@ -148,25 +143,23 @@
             <textarea
               class="largetextbox"
               rows="3"
-              name="Experience"
-              ngModel
+              formControlName="experience"
               required
             ></textarea>
           </div>
           <br />
           <div>
-            <label for="fname">About</label><br />
+            <label>About</label><br />
             <textarea
               class="largetextbox"
               rows="3"
-              name="About"
-              ngModel
+              formControlName="about"
               required
             ></textarea>
           </div>
           <br />
           <div>
-            <label for="fname"
+            <label
               >Education
               <span class="input-note"
                 >*No more than 500 characters recommended.</span
@@ -175,44 +168,39 @@
             <textarea
               class="largetextbox"
               rows="3"
-              name="Education"
-              ngModel
+              formControlName="education"
               required
             ></textarea>
           </div>
           <br />
           <div>
-            <label for="fname"
+            <label
               >Price Per Session
               <span class="input-note">
                 *This will not be displayed in the app.
               </span> </label
             ><br />
             <input
-              type="text"
+              type="number"
               name="Email"
               class="textbox-bottom"
-              [(ngModel)]="experience"
+              formControlName="pricePerSession"
             />
           </div>
           <br />
           <div>
             <br />
-            <label for="fname">Languages</label><br />
-            <select
-              class="selectbox textbox-top"
-              ngModel
-              name="languages"
-              required
-            >
+            <label>Languages</label><br />
+            <select class="selectbox textbox-bottom" name="languages" required>
               <option *ngFor="let language of Languages" value="{{ language }}">
                 {{ language }}
               </option>
             </select>
           </div>
           <br />
+          <!-- upload certificates -->
           <div class="upload-certificate-container">
-            <label for="fname">Certification and licenses </label>
+            <label>Certification and licenses </label>
             <app-drop-zone (fileEmmitor)="setfile($event)"></app-drop-zone>
           </div>
           <br />
@@ -220,19 +208,20 @@
           <br />
 
           <div>
-            <label for="fname">Location name </label><br />
+            <label>Location name </label><br />
             <input
               type="text"
               name="locationName"
               class="textbox-bottom"
-              [(ngModel)]="locationName"
+              formControlName="locationName"
             />
           </div>
+          <!-- TODO: need to add the location component -->
           <br />
           <br />
           <div>
             <input type="checkbox" name="terms" class="terms-checkbox" />
-            <label for="fname"
+            <label
               >By Applying you agree to the
               <span class="terms-link">terms and conditions</span> and guarantee
               that all the information is true and valid.</label
@@ -240,7 +229,7 @@
           </div>
           <br />
           <br />
-          <button type="submit" class="button">Submit</button>
+          <button (click)="submitHandler()" class="button">Submit</button>
         </div>
       </form>
     </div>

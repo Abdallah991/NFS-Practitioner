@@ -37,15 +37,25 @@
 }
 /* top right container */
 .top-fields {
-  padding: 5%;
+  padding-left: 5%;
+  padding-top: 5%;
   flex: 1;
   justify-self: center;
+}
+
+/* select fields padding */
+
+.top-fields select {
+  padding-left: 3.5%;
+  background: url(../../../assets/drop-down.png) no-repeat right white;
+  -webkit-appearance: none;
+  background-position-x: 95%;
 }
 
 /* text box in top right */
 .textbox-top {
   width: 90%;
-  height: 20px;
+  /* height: 46px; */
   border-radius: 25px;
   border: 0.8px solid #ebe8f2;
   outline: none;
@@ -83,8 +93,8 @@ label {
 }
 /* text box inside the bottom container */
 .textbox-bottom {
-  width: 95%;
-  height: 20px;
+  width: 100%;
+  height: 46px;
   border-radius: 25px;
   border: 0.8px solid #ebe8f2;
   outline: none;
@@ -92,7 +102,7 @@ label {
 
 /* select box  */
 .selectbox {
-  height: 50px;
+  height: 46px;
   width: 100%;
   border-radius: 25px;
   border: 0.8px solid #ebe8f2;
@@ -109,6 +119,14 @@ label {
   background-color: #6f62a9;
 }
 
+/* select fields padding */
+.bottom-fields select {
+  padding-left: 1%;
+  background: url(../../../assets/drop-down.png) no-repeat right white;
+  -webkit-appearance: none;
+  background-position-x: 99%;
+}
+
 /* title aliging */
 .center-align {
   text-align: center;
@@ -123,10 +141,26 @@ label {
 /* country code div */
 .country-code {
   flex: 1;
+  box-sizing: border-box !important;
+}
+/* select fields padding */
+.country-code select {
+  padding-left: 5%;
+  background: url(../../../assets/drop-down.png) no-repeat right white;
+  -webkit-appearance: none;
+  background-position-x: 95%;
 }
 /* phone number div */
 .phone-number {
   flex: 3;
+  box-sizing: border-box !important;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+/* select fields padding */
+.phone-number select {
+  padding-left: 5%;
 }
 /* textarea styling */
 .largetextbox {
@@ -137,6 +171,7 @@ label {
   outline: none;
   font-family: "Poppins";
   box-sizing: border-box !important;
+  padding: 1.5%;
 }
 
 /* text area note */

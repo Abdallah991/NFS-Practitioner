@@ -1,5 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, NgForm, Validators } from "@angular/forms";
+import {
+  COUNTRY_CODES,
+  GENDERS,
+  LANGUAGES,
+  TITLES,
+} from "src/app/constants/constants";
+import { SPECIALTIES, SUB_CATEGORIES } from "src/app/constants/specialities";
+import { DropzoneService } from "src/app/services/dropzone.service";
 
 @Component({
   selector: "app-register-practitioner",
@@ -7,57 +15,47 @@ import { FormBuilder, FormControl, NgForm, Validators } from "@angular/forms";
   styleUrls: ["./register-practitioner.component.css"],
 })
 export class RegisterPractitionerComponent implements OnInit {
-  @ViewChild("fe")
-  editDoctorForm!: NgForm;
+  // @ViewChild("fe")
+  // editDoctorForm!: NgForm;
 
-  constructor(public fb: FormBuilder) {}
-  title: any;
-  firstName: any;
-  lastName: any;
-  email: any;
-  phone: any;
-  specialty: any;
-  experience: any;
-  education: any;
-  price: any;
-  languages: any;
-  locationName: any;
+  constructor(public fb: FormBuilder, private DrS: DropzoneService) {}
+
+  RegisterPractitioner = this.fb.group({
+    specialty: [""],
+    firstName: new FormControl(""),
+    lastName: new FormControl(""),
+    email: new FormControl(""),
+    phone: new FormControl(""),
+    locationName: new FormControl(""),
+    gender: new FormControl(""),
+    experience: new FormControl(""),
+    about: new FormControl(""),
+    education: new FormControl(""),
+    pricePerSession: new FormControl(""),
+    title: [""],
+    subCategory: [""],
+  });
+
   filesAvailable: boolean = false;
-  titles = ["Dr.", "Ms.", "Mrs.", "Mr"];
-  genders = ["Male", "Female"];
-  countryCodes = ["BH", "USA", "FA"];
-  specialties = [
-    "Psychology",
-    "Psychiatry",
-    "Behavioral Therapy",
-    "Alternative Healing",
-    "Counselor",
-  ];
-  subCategories = ["Musical Therapy", "Cocoa Therapy", "Chocolate Therapy"];
-  Languages = ["Arabic", "English"];
+  titles = TITLES;
+  genders = GENDERS;
+  countryCodes = COUNTRY_CODES;
+  specialties = SPECIALTIES;
+  subCategories = SUB_CATEGORIES;
+  Languages = LANGUAGES;
+  mobNumberPattern = "^((\\+91-?)|0)?[0-9]{15}$";
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.DrS.image = "uploadicon.png";
+    this.DrS.size = "150px";
+  }
 
-  // registerPractitioner = this.fb.group({
-  //   firstName: new FormControl('', [Validators.required]),
-  //   lastName: new FormControl('', [Validators.required]),
-  //   email: new FormControl('', [Validators.required]),
-  //   phoneNumber: ['', [Validators.required]],
-  //   gender: ['', [Validators.required]],
-  //   speciality: ['', [Validators.required]],
-  //   subCategories: ['', [Validators.required]],
-  //   experience: ['', [Validators.required]],
-  //   about: ['', [Validators.required]],
-  //   education: ['', [Validators.required]],
-  //   pricePerSession: [''],
-  //   languages: ['', [Validators.required]],
-  //   locationName: [''],
-  // });
-
-  async onSubmit() {}
+  async submitHandler() {
+    console.log(this.RegisterPractitioner.value);
+  }
 
   setfile(event?: any) {
-    // this.DS.files = event;
     this.filesAvailable = true;
+    console.log(this.filesAvailable);
   }
 }
