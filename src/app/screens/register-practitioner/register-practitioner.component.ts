@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormControl, NgForm, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from "@angular/forms";
 import {
   COUNTRY_CODES,
   GENDERS,
@@ -17,24 +17,29 @@ import { DropzoneService } from "src/app/services/dropzone.service";
 export class RegisterPractitionerComponent implements OnInit {
   // @ViewChild("fe")
   // editDoctorForm!: NgForm;
+  RegisterPractitioner: FormGroup;
+  constructor(public fb: FormBuilder, private DrS: DropzoneService) {
+    this.RegisterPractitioner = this.fb.group({
+      specialty: [""],
+      firstName: new FormControl("", Validators.required),
+      lastName: new FormControl("",Validators.required),
+      email: new FormControl("",[Validators.required, Validators.email]),
+      phone: new FormControl("",Validators.required),
+      locationName: new FormControl("",Validators.required),
+      gender: new FormControl("",Validators.required),
+      experience: new FormControl("",Validators.required),
+      about: new FormControl("",Validators.required),
+      education: new FormControl("",Validators.required),
+      pricePerSession: new FormControl("",Validators.required),
+      title: [""],
+      subCategory: [""],
+    });
+  }
 
-  constructor(public fb: FormBuilder, private DrS: DropzoneService) {}
 
-  RegisterPractitioner = this.fb.group({
-    specialty: [""],
-    firstName: new FormControl(""),
-    lastName: new FormControl(""),
-    email: new FormControl(""),
-    phone: new FormControl(""),
-    locationName: new FormControl(""),
-    gender: new FormControl(""),
-    experience: new FormControl(""),
-    about: new FormControl(""),
-    education: new FormControl(""),
-    pricePerSession: new FormControl(""),
-    title: [""],
-    subCategory: [""],
-  });
+
+  submitted = false;
+
 
   filesAvailable: boolean = false;
   titles = TITLES;
@@ -52,6 +57,11 @@ export class RegisterPractitionerComponent implements OnInit {
 
   async submitHandler() {
     console.log(this.RegisterPractitioner.value);
+  }
+
+  onSubmit(){
+    this.submitted = true;
+
   }
 
   setfile(event?: any) {

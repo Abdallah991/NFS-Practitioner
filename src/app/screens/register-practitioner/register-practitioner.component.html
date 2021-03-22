@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="sidebox">
     <div>
-      <form [formGroup]="RegisterPractitioner">
+      <form [formGroup]="RegisterPractitioner" (ngSubmit)="onSubmit()">
         <h1 class="center-align">Register as Practitioner!</h1>
         <!-- top view -->
         <div class="top-view">
@@ -72,6 +72,7 @@
               class="textbox-bottom "
               formControlName="email"
             />
+           
           </div>
           <br />
           <div class="phone-container">
@@ -181,7 +182,7 @@
               </span> </label
             ><br />
             <input
-              type="number"
+              type="tel"
               name="pricePerSession"
               class="textbox-bottom"
               formControlName="pricePerSession"
@@ -210,7 +211,7 @@
           <div>
             <label>Location name </label><br />
             <input
-              name="locationName"
+              type="text"
               class="textbox-bottom"
               formControlName="locationName"
             />
@@ -228,7 +229,7 @@
           </div>
           <br />
           <br />
-          <button (click)="submitHandler()" class="button">Submit</button>
+          <button (click)="submitHandler()" type="submit" [disabled]="!RegisterPractitioner.valid"class="button" >Submit</button>
         </div>
       </form>
     </div>
