@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="sidebox">
     <div>
-      <form [formGroup]="RegisterPractitioner" (ngSubmit)="onSubmit()">
+      <form [formGroup]="registerPractitioner" (ngSubmit)="onSubmit()">
         <h1 class="center-align">Register as Practitioner!</h1>
         <!-- top view -->
         <div class="top-view">
@@ -34,6 +34,7 @@
               name="firstName"
               class="textbox-top"
               formControlName="firstName"
+              required
             /><br />
             <br />
             <label for="fname">Last name</label>
@@ -43,7 +44,21 @@
               name="lastName"
               class="textbox-top"
               formControlName="lastName"
-            /><br />
+            />
+            <!-- form validation -->
+            <!-- <div
+              *ngIf="
+                ((registerPractitioner?.controls)['firstName']?.errors
+                  ?.pattern &&
+                  (registerPractitioner?.controls)['firstName']?.touched) ||
+                ((registerPractitioner?.controls)['firstName']?.invalid &&
+                  (registerPractitioner?.controls)['firstName']?.touched)
+              "
+              class="alert alert-danger"
+            >
+              <div>Name must be at least 4 characters long.</div>
+            </div> -->
+            <!-- form validation --><br />
             <br />
             <label for="Gender">Gender</label><br />
             <br />
@@ -69,10 +84,9 @@
             <input
               type="email"
               name="Email"
-              class="textbox-bottom "
+              class="textbox-bottom"
               formControlName="email"
             />
-           
           </div>
           <br />
           <div class="phone-container">
@@ -229,7 +243,14 @@
           </div>
           <br />
           <br />
-          <button (click)="submitHandler()" type="submit" [disabled]="!RegisterPractitioner.valid"class="button" >Submit</button>
+          <button
+            (click)="submitHandler()"
+            type="submit"
+            [disabled]="!registerPractitioner.valid"
+            class="button"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>

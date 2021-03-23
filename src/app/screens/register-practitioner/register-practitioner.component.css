@@ -89,7 +89,6 @@ label {
 
 .bottom-fields div {
   width: 100%;
-
 }
 /* text box inside the bottom container */
 .textbox-bottom {
@@ -100,8 +99,6 @@ label {
   outline: none;
   padding-left: 20px;
   box-sizing: border-box !important;
-
-
 }
 
 /* select box  */
@@ -145,7 +142,7 @@ label {
 /* country code div */
 .country-code {
   flex: 1;
-  
+
   box-sizing: border-box !important;
 }
 /* select fields padding */
@@ -164,7 +161,7 @@ label {
   justify-content: flex-end;
 }
 .phone-number input {
-  width: 90%
+  width: 90%;
 }
 /* select fields padding */
 .phone-number select {
