@@ -14,6 +14,7 @@ import {
 } from "src/app/constants/constants";
 import { SPECIALTIES, SUB_CATEGORIES } from "src/app/constants/specialities";
 import { DropzoneService } from "src/app/services/dropzone.service";
+import { PractitionerService } from "src/app/services/practitioner.service";
 
 @Component({
   selector: "app-register-practitioner",
@@ -25,32 +26,56 @@ export class RegisterPractitionerComponent implements OnInit {
   stringPattern = "[a-zA-Z ]*";
   numberPattern = /\-?\d*\.?\d{1,2}/;
   emailPattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-
-  registerPractitioner!: FormGroup;
-  constructor(public fb: FormBuilder, private DrS: DropzoneService) {}
+  //  urls for certifications
+  urls: any[] = [];
+  //  certifications fie names
+  fileNames: string[] = [];
+  //  form group declaration
+  registerPractitioner: FormGroup = this.fb.group({
+    specialty: [""],
+    firstName: new FormControl("", [
+      Validators.required,
+      Validators.pattern(this.stringPattern),
+    ]),
+  });
+  constructor(
+    public fb: FormBuilder,
+    private DrS: DropzoneService,
+    private PS: PractitionerService
+  ) {}
 
   submitted = false;
 
-  filesAvailable: boolean = false;
+  //  drop downs content
   titles = TITLES;
   genders = GENDERS;
   countryCodes = COUNTRY_CODES;
   specialties = SPECIALTIES;
   subCategories = SUB_CATEGORIES;
   Languages = LANGUAGES;
-  private files!: File;
+  //  uploading file variable
+  private files: File | undefined;
+  filesAvailable: boolean = false;
 
   ngOnInit(): void {
-    this.DrS.image = "uploadicon.png";
+    this.DrS.image = "";
     this.DrS.size = "150px";
+    //  form group initialization
+
     this.registerPractitioner = this.fb.group({
       specialty: [""],
       firstName: new FormControl("", [
         Validators.required,
         Validators.pattern(this.stringPattern),
       ]),
-      lastName: new FormControl(""),
-      email: new FormControl(""),
+      lastName: new FormControl("", [
+        Validators.required,
+        Validators.pattern(this.stringPattern),
+      ]),
+      email: new FormControl("", [
+        Validators.required,
+        // Validators.pattern(this.stringPattern),
+      ]),
       phone: new FormControl("", [
         Validators.required,
         // Validators.pattern(this.numberPattern),
@@ -83,16 +108,36 @@ export class RegisterPractitionerComponent implements OnInit {
   }
 
   async submitHandler() {
+    console.log("The button was clicked onhandler");
     console.log(this.registerPractitioner.value);
   }
 
   onSubmit() {
+    console.log("The button was clicked onsubmit");
     this.submitted = true;
   }
 
   setfile(event: any) {
-    this.files = event;
+    this.PS.file = event;
+    console.log(this.PS.file);
+    console.log(event);
     this.filesAvailable = true;
     console.log(this.filesAvailable);
+  }
+
+  selectFiles(event: any) {
+    if (event.target.files) {
+      for (let i = 0; i < File.length; i++) {
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        this.fileNames.push(event.target.files[i].name);
+        reader.onload = (event: any) => {
+          this.urls.push(event.target.result);
+          console.log(this.urls);
+        };
+      }
+
+      console.log(this.fileNames);
+    }
   }
 }

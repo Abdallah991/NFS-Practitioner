@@ -35,7 +35,21 @@
               class="textbox-top"
               formControlName="firstName"
               required
-            /><br />
+            />
+            <div
+              class="error-message"
+              *ngIf="
+                ((registerPractitioner?.controls)['firstName']?.errors
+                  ?.pattern &&
+                  (registerPractitioner?.controls)['firstName']?.touched) ||
+                ((registerPractitioner?.controls)['firstName']?.invalid &&
+                  (registerPractitioner?.controls)['firstName']?.touched)
+              "
+            >
+              Invalid first name.
+              <br />
+            </div>
+            <br />
             <br />
             <label for="fname">Last name</label>
             <br />
@@ -214,13 +228,28 @@
           </div>
           <br />
           <!-- upload certificates -->
-          <div class="upload-certificate-container">
+          <div>
             <label>Certification and licenses </label>
-            <app-drop-zone (fileEmmitor)="setfile($event)"></app-drop-zone>
+            <div class="uploadfilecontainer2" (click)="fileInput.click()">
+              <!-- <img *ngFor="let url of urls" [src]="url" alt="" /> -->
+              <input
+                type="file"
+                multiple
+                hidden
+                (change)="selectFiles($event)"
+                #fileInput
+              />
+            </div>
+            <div *ngFor="let name of fileNames" class="file-list">
+              <img src="../../../assets/file.png" />
+              <p>{{ name }}</p>
+            </div>
           </div>
+
           <br />
           <br />
           <br />
+          <!-- upload certificates -->
 
           <div>
             <label>Location name </label><br />

@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterPractitionerComponent } from './screens/register-practitioner/register-practitioner.component';
 import { DropZoneComponent } from './drop-zone/drop-zone.component';
+import { MultiFileUploadComponent } from './multi-file-upload/multi-file-upload.component';
 
 // var firebaseConfig = {
 //   apiKey: "AIzaSyCSAlM97c2AG4OXMtBmUNuSjecONPoUUlY",
@@ -39,6 +40,7 @@ var firebaseConfig = {
     AppComponent,
     RegisterPractitionerComponent,
     DropZoneComponent,
+    MultiFileUploadComponent,
   ],
   imports: [
     BrowserModule,

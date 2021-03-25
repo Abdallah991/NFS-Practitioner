@@ -19,9 +19,9 @@ export class DropZoneComponent implements OnInit {
   constructor(private DS: DropzoneService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.setBackground();
-    }, 3000);
+    // setTimeout(() => {
+    //   this.setBackground();
+    // }, 3000);
   }
 
   setBackground() {
@@ -36,8 +36,9 @@ export class DropZoneComponent implements OnInit {
 
   element: any;
 
-  uploadFile(event?: any) {
-    this.element = event[0];
+  uploadFile(event: any) {
+    this.element = event.target.files[0];
+    console.log(event.target.files[0], this.element.size);
 
     if (this.element.size < 2000000) {
       console.log(this.element.size + " image size");
@@ -47,7 +48,7 @@ export class DropZoneComponent implements OnInit {
       // this.Image = element.name;
 
       var reader = new FileReader();
-      reader.readAsDataURL(event[0]);
+      reader.readAsDataURL(this.element);
 
       reader.onload = (_event) => {
         this.urlRead = reader.result;

@@ -208,3 +208,46 @@ label {
   height: 40px;
   margin: 0% 30%;
 }
+
+/* Upload multiple file */
+.uploadfilecontainer2 {
+  /* background-image: url("../../../assets/uploadicon.png");
+  background-repeat: no-repeat;
+  background-size: 170px;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  margin: 20px auto;
+  border: 1px solid #ebe8f2;
+  border-radius: 10px;
+  color: rgb(97, 82, 160); */
+  height: 100%;
+  border: 1px solid #ebe8f2;
+  border-radius: 10px;
+  color: rgb(97, 82, 160);
+  background-image: url("../../../assets/uploadicon.png");
+  background-repeat: no-repeat;
+  height: 150px;
+  background-position: center;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ebe8f2;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.file-list img {
+  height: 30px;
+  align-self: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  /* flex: 2; */
+}
+
+.file-list p {
+  flex: 5;
+  color: #757575;
+}
