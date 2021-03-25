@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'NFS-Practitioner'`, () => {
+  it(`should have as title 'NFSPractioner3'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('NFS-Practitioner');
+    expect(app.title).toEqual('NFSPractioner3');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('NFS-Practitioner app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('NFSPractioner3 app is running!');
   });
 });

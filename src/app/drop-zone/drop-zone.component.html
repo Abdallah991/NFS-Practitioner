@@ -8,10 +8,16 @@
     'background-size': size
   }"
 >
-  <input hidden type="file" #fileInput (change)="uploadFile($event)" required />
+  <input
+    hidden
+    type="file"
+    #fileInput
+    (change)="uploadFile($event.target.files)"
+    required
+  />
 
   <div class="textdrop">
-    <!-- <p>Drag and Drop Image or Click to Browse</p> -->
-    <p>File name: {{ ab }}</p>
+    <p>Drag and Drop Image or Click to Browse</p>
+    <p>file name: {{ ab }}</p>
   </div>
 </div>

@@ -20,12 +20,17 @@
             <select
               class="selectbox textbox-top"
               formControlName="title"
+              (change)="changeTitle($event)"
               required
             >
-              <option *ngFor="let title of titles" value="{{ title }}">
+              <option *ngFor="let title of titles" [ngValue]="title">
                 {{ title }}
-              </option></select
-            ><br />
+              </option>
+            </select>
+            <!-- <div *ngIf="submitted && title.errors?.required">
+              <sup>*</sup>Please enter your title
+            </div> -->
+            <br />
             <br />
 
             <label>First name</label>
@@ -36,19 +41,7 @@
               formControlName="firstName"
               required
             />
-            <div
-              class="error-message"
-              *ngIf="
-                ((registerPractitioner?.controls)['firstName']?.errors
-                  ?.pattern &&
-                  (registerPractitioner?.controls)['firstName']?.touched) ||
-                ((registerPractitioner?.controls)['firstName']?.invalid &&
-                  (registerPractitioner?.controls)['firstName']?.touched)
-              "
-            >
-              Invalid first name.
-              <br />
-            </div>
+
             <br />
             <br />
             <label for="fname">Last name</label>
@@ -59,20 +52,8 @@
               class="textbox-top"
               formControlName="lastName"
             />
-            <!-- form validation -->
-            <!-- <div
-              *ngIf="
-                ((registerPractitioner?.controls)['firstName']?.errors
-                  ?.pattern &&
-                  (registerPractitioner?.controls)['firstName']?.touched) ||
-                ((registerPractitioner?.controls)['firstName']?.invalid &&
-                  (registerPractitioner?.controls)['firstName']?.touched)
-              "
-              class="alert alert-danger"
-            >
-              <div>Name must be at least 4 characters long.</div>
-            </div> -->
-            <!-- form validation --><br />
+
+            <br />
             <br />
             <label for="Gender">Gender</label><br />
             <br />
@@ -89,6 +70,17 @@
                 {{ gender }}
               </label>
             </div>
+            <!-- <div
+              class="error-message"
+              *ngIf="
+                ((registerPractitioner?.controls)['gender']?.errors?.pattern &&
+                  (registerPractitioner?.controls)['gender']?.touched) ||
+                ((registerPractitioner?.controls)['gender']?.invalid &&
+                  (registerPractitioner?.controls)['gender']?.touched)
+              "
+            >
+              select gender.
+            </div> -->
           </div>
         </div>
         <!-- Email, phone, specialty, sub-categries .... etc-->
@@ -102,6 +94,7 @@
               formControlName="email"
             />
           </div>
+
           <br />
           <div class="phone-container">
             <div class="country-code">
@@ -136,6 +129,7 @@
               class="selectbox textbox-bottom"
               formControlName="specialty"
               required
+              (change)="changeSpecialty($event)"
             >
               <option
                 *ngFor="let speciality of specialties"
@@ -152,6 +146,7 @@
               class="selectbox textbox-bottom"
               formControlName="subCategory"
               required
+              (change)="changeSubCategory($event)"
             >
               <option
                 *ngFor="let subCategory of subCategories"
