@@ -10,6 +10,7 @@ import { DropZoneComponent } from './drop-zone/drop-zone.component';
 import { RegisterPractitionerComponent } from './screens/register-practitioner/register-practitioner.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { AgmCoreModule } from '@agm/core';
 var firebaseConfig = {
   apiKey: 'AIzaSyDpZ8iww9uPG0gnqA0yHO9gZlBP6nttXuc',
   authDomain: 'nfsapp-390d4.firebaseapp.com',
@@ -28,6 +29,10 @@ var firebaseConfig = {
     DropZoneComponent,
   ],
   imports: [
+
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCcLZGjrULCMhRZLkRHAD-mO92j06Vidyk'
+    }),
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),

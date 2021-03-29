@@ -11,7 +11,8 @@ import {
   COUNTRY_CODES,
   LANGUAGES,
 } from 'src/app/constants/constants';
-import { SPECIALTIES, SUB_CATEGORIES } from 'src/app/constants/specialties';
+import { SPECIALTIES, SUB_CATEGORIES_ALTERNATIVE, SUB_CATEGORIES_BEHAVRIORAL } from 'src/app/constants/specialties';
+import { Applicant } from 'src/app/models/applicant.model';
 import { DropzoneService } from 'src/app/services/dropzone.service';
 import { PractitionerService } from 'src/app/services/practitioner.service';
 
@@ -21,6 +22,11 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
   styleUrls: ['./register-practitioner.component.css'],
 })
 export class RegisterPractitionerComponent implements OnInit {
+
+  lat = 51.678418;
+  lng = 7.809007;
+  mapType = 'satellite';
+
   //patterns for input validation
   stringPattern = '[a-zA-Z ]*';
   numberPattern = /\-?\d*\.?\d{1,2}/;
@@ -44,7 +50,10 @@ export class RegisterPractitionerComponent implements OnInit {
   genders = GENDERS;
   countryCodes = COUNTRY_CODES;
   specialties = SPECIALTIES;
-  subCategories = SUB_CATEGORIES;
+  subCategories = SUB_CATEGORIES_ALTERNATIVE;
+  showSubCategories = false;
+   applicant: Applicant;
+
   Languages = LANGUAGES;
   //  uploading file variable
   private files: File | undefined;
@@ -54,7 +63,7 @@ export class RegisterPractitionerComponent implements OnInit {
     this.DrS.image = '';
     this.DrS.size = '150px';
     //  form group initialization
-
+    
     this.registerPractitioner = this.fb.group({
       specialty: ['', [Validators.required]],
       firstName: new FormControl('', [
@@ -83,16 +92,43 @@ export class RegisterPractitionerComponent implements OnInit {
         Validators.pattern(this.numberPattern),
       ]),
       title: ['', [Validators.required]],
-      subCategory: ['', [Validators.required]],
+      subCategory: ['', 
+      // [Validators.required]
+    ],
     });
-  }
-
-  get firstName() {
-    return this.registerPractitioner.get('firstName');
   }
 
   get title() {
     return this.registerPractitioner.get('title');
+  }
+  get firstName() {
+    return this.registerPractitioner.get('firstName');
+  }
+  get lastName() {
+    return this.registerPractitioner.get('lastName');
+  }
+
+  get email() {
+    return this.registerPractitioner.get('email');
+  }
+
+  get phone() {
+    return this.registerPractitioner.get('phone');
+  }
+  get locationName() {
+    return this.registerPractitioner.get('locationName');
+  }
+  get experience() {
+    return this.registerPractitioner.get('experience');
+  }
+  get about() {
+    return this.registerPractitioner.get('about');
+  }
+  get education() {
+    return this.registerPractitioner.get('education');
+  }
+  get pricePerSession() {
+    return this.registerPractitioner.get('pricePerSession');
   }
   get subCategory() {
     return this.registerPractitioner.get('subCategory');
@@ -102,8 +138,15 @@ export class RegisterPractitionerComponent implements OnInit {
   }
 
   async submitHandler() {
+    this.loadApplicantData();
+    if (this.registerPractitioner.valid) {
     console.log('The button was clicked onhandler');
     console.log(this.registerPractitioner.value);
+   
+
+  } else {
+
+  }
   }
 
   onSubmit() {
@@ -145,11 +188,37 @@ export class RegisterPractitionerComponent implements OnInit {
     this.specialty.setValue(e.target.value, {
       onlySelf: true,
     });
+
+    console.log(e.target.value);
+    switch(e.target.value) {
+  
+  case SPECIALTIES[2]:
+  this.subCategories = SUB_CATEGORIES_BEHAVRIORAL;
+  this.showSubCategories = true;
+  break;
+  case SPECIALTIES[3]:
+    this.subCategories = SUB_CATEGORIES_ALTERNATIVE;
+    this.showSubCategories = true;
+    break;
+    default:
+    this.showSubCategories = false;
+    break;
+
+    }
+    
   }
 
   changeSubCategory(e) {
     this.subCategory.setValue(e.target.value, {
       onlySelf: true,
     });
+
   }
+
+  // upload applicant
+  loadApplicantData() {
+    console.log(this.title.value, 'hello');
+  }
+
+  
 }

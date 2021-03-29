@@ -140,12 +140,11 @@
             </select>
           </div>
           <br />
-          <div>
+          <div *ngIf="showSubCategories">
             <label>Sub-Categories</label><br />
             <select
               class="selectbox textbox-bottom"
               formControlName="subCategory"
-              required
               (change)="changeSubCategory($event)"
             >
               <option
@@ -254,6 +253,12 @@
               formControlName="locationName"
             />
           </div>
+
+          <!-- <div> -->
+            <agm-map [latitude]="lat" [longitude]="lng" [mapTypeId]="mapType">
+              <!-- <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker> -->
+            </agm-map>
+          <!-- </div> -->
           <!-- TODO: need to add the location component -->
           <br />
           <br />
