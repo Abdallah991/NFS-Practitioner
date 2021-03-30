@@ -1,50 +1,102 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { Applicant } from '../models/applicant.model';
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/firestore";
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from "@angular/fire/storage";
+import { BehaviorSubject } from "rxjs";
+import { Applicant } from "../models/applicant.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class PractitionerService {
+  // loading sub
+  public loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  // files to be updated (image + certificates)
   file: File;
+  task: AngularFireUploadTask;
   certificates: File[];
+  // values of applicant data
+  certificateNames = [];
+  title = "";
+  practitionerFirstName = "";
+  practitionerLastName = "";
+  email = "";
+  about = "";
+  education = "";
+  experience = "";
+  gender: string = "";
+  phone = "";
+  countryCode = "";
+  specialty = "";
+  subCategory = "";
+  pricePerSession: number;
+  lat: string = "";
+  longt: string = "";
+  locationDescription: string = "";
+  rating: number = 0;
+  practitionerId: string = "";
+  locationName: string = "";
+  languages: string = "";
+  imagePath: string = "";
 
-  constructor(private storage: AngularFireStorage,
-    private fireStore: AngularFirestore) {}
+  constructor(
+    private storage: AngularFireStorage,
+    private fireStore: AngularFirestore
+  ) {}
 
-
-
-    async uploadApplicant(practitioner: Applicant) {
-      try {
+  // uplaod applicant to firestore
+  async uploadApplicant() {
+    try {
       await this.fireStore
         .collection("Applicants")
-        .doc('applicant1')
-        .set({ 
-          title: practitioner.title,
-          practitionerFirstName: practitioner.practitionerFirstName,
-          practitionerLastName: practitioner.practitionerLastName,
-          gender: practitioner.gender,
-          email: practitioner.email,
-          phone: practitioner.phone,
-          countryCode: practitioner.countryCode,
-          specialty: practitioner.specialty,
-          subCategory: practitioner.subCategory,
-          experience: practitioner.experience,
-          education:practitioner.education,
-          about: practitioner.about,
-          pricePerSession: practitioner.pricePerSession,
-          languages: practitioner.languages,
-          certificates: practitioner.certificates,
-          lat: practitioner.lat,
-          longt: practitioner.longt,
-          locationName: practitioner.locationName
-
-        
-        
+        .add({
+          title: this.title,
+          practitionerFirstName: this.practitionerFirstName,
+          practitionerLastName: this.practitionerLastName,
+          gender: this.gender,
+          email: this.email,
+          phone: this.phone,
+          countryCode: this.countryCode,
+          specialty: this.specialty,
+          subCategory: this.subCategory,
+          experience: this.experience,
+          education: this.education,
+          about: this.about,
+          pricePerSession: this.pricePerSession,
+          languages: this.languages,
+          certificates: this.certificateNames,
+          lat: this.lat,
+          longt: this.longt,
+          locationName: this.locationName,
+          id: "",
+          imagePath: this.imagePath,
+        })
+        .then(async (res) => {
+          console.log("the result from Firebase", res.id);
+          // set the image path
+          this.imagePath = res.id + ".jpg";
+          // update the id and image path of the applicant
+          await this.fireStore
+            .collection("Applicants")
+            .doc(res.id)
+            .update({ id: res.id, imagePath: this.imagePath });
+        })
+        .then((res) => {
+          console.log("result formt the update", res);
+          // upload the applicant image
+          this.uploadPractitionerImage();
         });
-      } catch(err) {
-        console.log(err)
-      }
+    } catch (err) {
+      console.log(err);
     }
+  }
+  // upload applicant image implementation
+  uploadPractitionerImage() {
+    const path = this.imagePath;
+    try {
+      this.task = this.storage.upload(this.imagePath, this.file);
+    } catch (err) {}
+  }
 }

@@ -209,6 +209,11 @@ label {
   margin: 0% 30%;
 }
 
+/* if button is disabled */
+.button :disabled {
+  background-color: grey;
+}
+
 /* Upload multiple file */
 .uploadfilecontainer2 {
   /* background-image: url("../../../assets/uploadicon.png");

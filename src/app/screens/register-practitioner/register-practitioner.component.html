@@ -21,15 +21,12 @@
               class="selectbox textbox-top"
               formControlName="title"
               (change)="changeTitle($event)"
-              required
             >
-              <option *ngFor="let title of titles" [ngValue]="title">
+              <option *ngFor="let title of titles">
                 {{ title }}
               </option>
             </select>
-            <!-- <div *ngIf="submitted && title.errors?.required">
-              <sup>*</sup>Please enter your title
-            </div> -->
+
             <br />
             <br />
 
@@ -41,6 +38,17 @@
               formControlName="firstName"
               required
             />
+
+            <span
+              class="error-message"
+              *ngIf="
+                (firstName.touched || firstName.dirty) &&
+                firstName.invalid &&
+                firstName.errors.required
+              "
+            >
+              **</span
+            >
 
             <br />
             <br />
@@ -65,7 +73,6 @@
                   name="gender"
                   class="gender-radio"
                   formControlName="gender"
-                  required
                 />
                 {{ gender }}
               </label>
@@ -102,7 +109,7 @@
               <select
                 class="selectbox textbox-bottom"
                 name="countryCode"
-                required
+                (change)="changeCountryCode($event)"
               >
                 <option
                   *ngFor="let countrycode of countryCodes"
@@ -128,7 +135,6 @@
             <select
               class="selectbox textbox-bottom"
               formControlName="specialty"
-              required
               (change)="changeSpecialty($event)"
             >
               <option
@@ -167,7 +173,6 @@
               class="largetextbox"
               rows="3"
               formControlName="experience"
-              required
             ></textarea>
           </div>
           <br />
@@ -177,7 +182,6 @@
               class="largetextbox"
               rows="3"
               formControlName="about"
-              required
             ></textarea>
           </div>
           <br />
@@ -192,7 +196,6 @@
               class="largetextbox"
               rows="3"
               formControlName="education"
-              required
             ></textarea>
           </div>
           <br />
@@ -214,7 +217,12 @@
           <div>
             <br />
             <label>Languages</label><br />
-            <select class="selectbox textbox-bottom" name="languages" required>
+            <select
+              class="selectbox textbox-bottom"
+              name="languages"
+              formControlName="languages"
+              (change)="changeLanguage($event)"
+            >
               <option *ngFor="let language of Languages" value="{{ language }}">
                 {{ language }}
               </option>
@@ -255,11 +263,11 @@
           </div>
 
           <!-- <div> -->
-            <agm-map [latitude]="lat" [longitude]="lng" [mapTypeId]="mapType">
-              <!-- <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker> -->
-            </agm-map>
-          <!-- </div> -->
           <!-- TODO: need to add the location component -->
+          <agm-map [latitude]="lat" [longitude]="lng" [mapTypeId]="mapType">
+            <!-- <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker> -->
+          </agm-map>
+          <!-- </div> -->
           <br />
           <br />
           <div>
@@ -273,9 +281,8 @@
           <br />
           <br />
           <button
-            (click)="submitHandler()"
             type="submit"
-            [disabled]="!registerPractitioner.valid"
+            [disabled]="registerPractitioner.invalid"
             class="button"
           >
             Submit
