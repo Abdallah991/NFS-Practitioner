@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { AppComponent } from "src/app/app.component";
 import {
   TITLES,
   GENDERS,
@@ -16,7 +17,6 @@ import {
   SUB_CATEGORIES_ALTERNATIVE,
   SUB_CATEGORIES_BEHAVRIORAL,
 } from "src/app/constants/specialties";
-import { Applicant } from "src/app/models/applicant.model";
 import { DropzoneService } from "src/app/services/dropzone.service";
 import { PractitionerService } from "src/app/services/practitioner.service";
 
@@ -43,7 +43,8 @@ export class RegisterPractitionerComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private DrS: DropzoneService,
-    private PS: PractitionerService
+    private PS: PractitionerService,
+    private appComponent: AppComponent
   ) {}
 
   submitted = false;
@@ -56,8 +57,6 @@ export class RegisterPractitionerComponent implements OnInit {
   subCategories = SUB_CATEGORIES_ALTERNATIVE;
   showSubCategories = false;
   Languages = LANGUAGES;
-  //  uploading applicant's certificates and image
-  private file: File;
   filesAvailable: boolean = false;
 
   ngOnInit(): void {
@@ -148,7 +147,29 @@ export class RegisterPractitionerComponent implements OnInit {
     return this.registerPractitioner.get("languages");
   }
 
-  async submitHandler() {}
+  async submitHandler() {
+    // console.log(
+    //   "The button was clicked onsubmit",
+    //   this.registerPractitioner.value
+    // );
+    // this.submitted = true;
+    // this.loadApplicantData();
+    // // log out the form and if its valid
+    // console.log(
+    //   this.registerPractitioner.value,
+    //   this.registerPractitioner.valid
+    // );
+    // if (this.registerPractitioner.valid) {
+    //   this.PS.uploadApplicant();
+    //   console.log("The button was clicked onhandler");
+    // } else {
+    //   console.log("the snack bar");
+    //   this._snackBar.open("Docter has been added", "Return to dashboard", {
+    //     duration: 10000,
+    //     panelClass: ["snackbar"],
+    //   });
+    // }
+  }
 
   onSubmit() {
     console.log(
@@ -164,9 +185,11 @@ export class RegisterPractitionerComponent implements OnInit {
     );
     if (this.registerPractitioner.valid) {
       this.PS.uploadApplicant();
-
       console.log("The button was clicked onhandler");
     } else {
+      this.appComponent.openFailureSnackBar(
+        "Please fill the missing information"
+      );
     }
   }
 

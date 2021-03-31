@@ -22,7 +22,7 @@
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 0px;
-  padding: 5%;
+  padding: 0% 5%;
 }
 
 /* top container */
@@ -206,12 +206,15 @@ label {
   border-radius: 20px;
   width: 180px;
   height: 40px;
-  margin: 0% 30%;
+  margin: 5% 30%;
 }
 
 /* if button is disabled */
-.button :disabled {
-  background-color: grey;
+.button:disabled,
+.button[disabled] {
+  /* border: 1px solid #999999; */
+  background-color: #cccccc;
+  color: white;
 }
 
 /* Upload multiple file */

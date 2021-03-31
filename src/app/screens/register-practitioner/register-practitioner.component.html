@@ -173,15 +173,22 @@
               class="largetextbox"
               rows="3"
               formControlName="experience"
+              maxlength="500"
             ></textarea>
           </div>
           <br />
           <div>
-            <label>About</label><br />
+            <label
+              >About
+              <span class="input-note"
+                >*No more than 500 characters recommended.</span
+              > </label
+            ><br />
             <textarea
               class="largetextbox"
               rows="3"
               formControlName="about"
+              maxlength="500"
             ></textarea>
           </div>
           <br />
@@ -196,6 +203,7 @@
               class="largetextbox"
               rows="3"
               formControlName="education"
+              maxlength="500"
             ></textarea>
           </div>
           <br />
@@ -274,8 +282,10 @@
             <input type="checkbox" name="terms" class="terms-checkbox" />
             <label
               >By Applying you agree to the
-              <span class="terms-link">terms and conditions</span> and guarantee
-              that all the information is true and valid.</label
+              <a href="https://www.nfsapp.online/legal/" target="_blank">
+                <span class="terms-link">terms and conditions</span></a
+              >
+              and guarantee that all the information is true and valid.</label
             >
           </div>
           <br />
@@ -284,6 +294,7 @@
             type="submit"
             [disabled]="registerPractitioner.invalid"
             class="button"
+            (click)="submitHandler()"
           >
             Submit
           </button>
