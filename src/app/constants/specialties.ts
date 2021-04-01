@@ -1,24 +1,23 @@
 export const SPECIALTIES = [
-  'Psychology',
-  'Psychiatry',
-  'Behavioral Therapy',
-  'Alternative Healing',
-  'Counselor',
+  "Psychology",
+  "Psychiatry",
+  "Behavioral Therapy",
+  "Alternative Healing",
+  "Counselor",
+  // this will be considered as a Counselor
+  "Legal Representative",
 ];
-
-// Music therapist, play therapist, art therapist, sex therapist , hypnotic therapist, ABA therapist , speech and language therapist, occupational therapist, physio therapist, life coach
 
 export const SUB_CATEGORIES_ALTERNATIVE = [
-  'Music Therapy',
-  'Play Therapy',
-  'Art Therapy',
-  'Sex Therapy',
-  'Hypnotic Therapy',
-  'Speech and language Therapy',
-  'Occupational Therapy',
-  'Life coach',
+  "Music Therapy",
+  "Play Therapy",
+  "Art Therapy",
+  "Sex Therapy",
+  "Hypnotic Therapy",
+  "Speech and language Therapy",
+  "Occupational Therapy",
+  "Life coach",
+  "Other",
 ];
 
-export const SUB_CATEGORIES_BEHAVRIORAL = [
-  'ABA Therapy',
-];
+export const SUB_CATEGORIES_BEHAVRIORAL = ["ABA Therapy"];

@@ -1,3 +1,4 @@
+import { ɵangular_packages_animations_browser_browser_a } from "@angular/animations/browser";
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -5,12 +6,14 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import * as sendgrid from "@sendgrid/mail";
 import { AppComponent } from "src/app/app.component";
 import {
   TITLES,
   GENDERS,
   COUNTRY_CODES,
   LANGUAGES,
+  SENDGRID_API_KEY,
 } from "src/app/constants/constants";
 import {
   SPECIALTIES,
@@ -59,6 +62,17 @@ export class RegisterPractitionerComponent implements OnInit {
   Languages = LANGUAGES;
   filesAvailable: boolean = false;
 
+  // send grid
+  sgMail = require("@sendgrid/mail");
+
+  msg = {
+    to: "abdallah@fthm.me",
+    from: "abdallah@fthm.me",
+    subject: "test",
+    text: "body",
+    html: "<strong> this is a test</strong>",
+  };
+
   ngOnInit(): void {
     this.DrS.image = "";
     this.DrS.size = "150px";
@@ -96,6 +110,25 @@ export class RegisterPractitionerComponent implements OnInit {
       languages: [this.Languages[0], [Validators.required]],
       subCategory: [""],
     });
+
+    // send grid
+    this.sgMail = sendgrid.setApiKey(
+      "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"
+    );
+    // "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"
+    //     echo "export SENDGRID_API_KEY='YSG.XPKP_LbbTrKI1lE68yvo8A.BryzuAsaB6G44ylsFJ5sQl-mpQsB8t9FYEImdl7Awpk'" > sendgrid.env
+    // echo "sendgrid.env" >> .gitignore
+    // source ./sendgrid.env
+
+    this.sgMail
+      .send(this.msg)
+      .then((response) => {
+        console.log(response[0].statusCode);
+        console.log(response[0].headers);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   // getters for from
