@@ -29,10 +29,12 @@ import { PractitionerService } from "src/app/services/practitioner.service";
   styleUrls: ["./register-practitioner.component.css"],
 })
 export class RegisterPractitionerComponent implements OnInit {
+  // Test coordinates
   lat = 51.678418;
   lng = 7.809007;
   mapType = "satellite";
 
+  msg;
   //patterns for input validation
   stringPattern = "[a-zA-Z ]*";
   numberPattern = /\-?\d*\.?\d{1,2}/;
@@ -41,6 +43,7 @@ export class RegisterPractitionerComponent implements OnInit {
   urls: any[] = [];
   //  certifications file names
   fileNames: string[] = [];
+  attachements: string;
   //  form group declaration
   registerPractitioner: FormGroup;
   constructor(
@@ -61,17 +64,9 @@ export class RegisterPractitionerComponent implements OnInit {
   showSubCategories = false;
   Languages = LANGUAGES;
   filesAvailable: boolean = false;
-
-  // send grid
+  // Send Grid code
   sgMail = require("@sendgrid/mail");
-
-  msg = {
-    to: "abdallah@fthm.me",
-    from: "abdallah@fthm.me",
-    subject: "test",
-    text: "body",
-    html: "<strong> this is a test</strong>",
-  };
+  fs = require("fs");
 
   ngOnInit(): void {
     this.DrS.image = "";
@@ -110,25 +105,6 @@ export class RegisterPractitionerComponent implements OnInit {
       languages: [this.Languages[0], [Validators.required]],
       subCategory: [""],
     });
-
-    // send grid
-    this.sgMail = sendgrid.setApiKey(
-      "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"
-    );
-    // "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"
-    //     echo "export SENDGRID_API_KEY='YSG.XPKP_LbbTrKI1lE68yvo8A.BryzuAsaB6G44ylsFJ5sQl-mpQsB8t9FYEImdl7Awpk'" > sendgrid.env
-    // echo "sendgrid.env" >> .gitignore
-    // source ./sendgrid.env
-
-    this.sgMail
-      .send(this.msg)
-      .then((response) => {
-        console.log(response[0].statusCode);
-        console.log(response[0].headers);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
   // getters for from
@@ -204,6 +180,7 @@ export class RegisterPractitionerComponent implements OnInit {
     // }
   }
 
+  // submit button implementation
   onSubmit() {
     console.log(
       "The button was clicked onsubmit",
@@ -226,6 +203,7 @@ export class RegisterPractitionerComponent implements OnInit {
     }
   }
 
+  // upload practitioner image
   setfile(event: any) {
     this.PS.file = event;
     console.log(this.PS.file);
@@ -234,15 +212,22 @@ export class RegisterPractitionerComponent implements OnInit {
     console.log(this.filesAvailable);
   }
 
+  // upload certificates
   selectFiles(event: any) {
     if (event.target.files) {
       for (let i = 0; i < File.length; i++) {
         var reader = new FileReader();
+        // var attachment = this.fs
+        //   .readFileSync(event.target.files[i])
+        //   .toString("base64");
+        // console.log(attachment);
         reader.readAsDataURL(event.target.files[i]);
         this.fileNames.push(event.target.files[i].name);
         reader.onload = (event: any) => {
           this.urls.push(event.target.result);
-          console.log(this.urls);
+          this.attachements = event.target.result.toString("base64");
+          console.log(this.attachements);
+          this.sendEmail();
         };
       }
 
@@ -250,18 +235,21 @@ export class RegisterPractitionerComponent implements OnInit {
     }
   }
 
+  // select title
   changeTitle(e) {
     this.title.setValue(e.target.value, {
       onlySelf: true,
     });
   }
 
+  // select country code
   changeCountryCode(e) {
     this.countryCode.setValue(e.target.value, {
       onlySelf: true,
     });
   }
 
+  // select specialty
   changeSpecialty(e) {
     this.specialty.setValue(e.target.value, {
       onlySelf: true,
@@ -283,19 +271,22 @@ export class RegisterPractitionerComponent implements OnInit {
     }
   }
 
+  //  select sub-category
   changeSubCategory(e) {
     this.subCategory.setValue(e.target.value, {
       onlySelf: true,
     });
   }
 
+  //  select language
   changeLanguage(e) {
     this.languages.setValue(e.target.value, {
       onlySelf: true,
+      //
     });
   }
 
-  // upload applicant
+  // upload applicant data into the service
   loadApplicantData() {
     this.PS.title = this.title.value;
     this.PS.practitionerFirstName = this.firstName.value;
@@ -313,5 +304,44 @@ export class RegisterPractitionerComponent implements OnInit {
     this.PS.languages = this.languages.value;
     this.PS.locationName = this.locationName.value;
     this.PS.certificateNames = this.fileNames;
+  }
+
+  sendEmail() {
+    this.msg = {
+      to: "abdallah@fthm.me",
+      from: "abdallah@fthm.me",
+      subject: "test",
+      text: "body",
+      html: "<h1> this is a test</h1>",
+      attachments: [
+        {
+          content: this.attachements,
+          filename: "atta",
+          type: "application/pdf",
+          disposition: "attachment",
+        },
+      ],
+    };
+
+    // send grid api key
+    this.sgMail = sendgrid.setApiKey(
+      "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"
+    );
+
+    // "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"
+    //     echo "export SENDGRID_API_KEY='YSG.XPKP_LbbTrKI1lE68yvo8A.BryzuAsaB6G44ylsFJ5sQl-mpQsB8t9FYEImdl7Awpk'" > sendgrid.env
+    // echo "sendgrid.env" >> .gitignore
+    // source ./sendgrid.env
+
+    // send gird send email code
+    this.sgMail
+      .send(this.msg)
+      .then((response) => {
+        console.log(response[0].statusCode);
+        console.log(response[0].headers);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
