@@ -32,8 +32,8 @@ export class PractitionerService {
   specialty = "";
   subCategory = "";
   pricePerSession: number;
-  lat: string = "";
-  longt: string = "";
+  lat: number = 0;
+  longt: number = 0;
   locationDescription: string = "";
   rating: number = 0;
   practitionerId: string = "";

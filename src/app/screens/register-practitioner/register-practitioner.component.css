@@ -219,21 +219,22 @@ label {
 
 /* Upload multiple file */
 .uploadfilecontainer2 {
-  /* background-image: url("../../../assets/uploadicon.png");
-    background-repeat: no-repeat;
-    background-size: 170px;
-    background-position: center;
-    height: 100%;
-    width: 100%;
-    margin: 20px auto;
-    border: 1px solid #ebe8f2;
-    border-radius: 10px;
-    color: rgb(97, 82, 160); */
   height: 100%;
   border: 1px solid #ebe8f2;
   border-radius: 10px;
   color: rgb(97, 82, 160);
   background-image: url("../../../assets/uploadicon.png");
+  background-repeat: no-repeat;
+  height: 150px;
+  background-position: center;
+}
+
+.location-container {
+  height: 100%;
+  border: 1px solid #ebe8f2;
+  border-radius: 10px;
+  color: rgb(97, 82, 160);
+  background-image: url("../../../assets/drop-pin.png");
   background-repeat: no-repeat;
   height: 150px;
   background-position: center;
@@ -266,4 +267,9 @@ select.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
   border: 1px solid rgb(255, 0, 0);
   background-color: rgba(255, 0, 0, 0.214);
+}
+
+.terms-conditions {
+  display: flex;
+  flex-direction: row;
 }

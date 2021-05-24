@@ -12,6 +12,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule, MatDialog } from "@angular/material/dialog";
 import { AgmCoreModule } from "@agm/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LocationPickerComponent } from "./components/location-picker/location-picker.component";
 
 var firebaseConfig = {
   apiKey: "AIzaSyDpZ8iww9uPG0gnqA0yHO9gZlBP6nttXuc",
@@ -23,16 +24,28 @@ var firebaseConfig = {
   appId: "1:1013389679732:web:594ecaed7f210b13e5c521",
   measurementId: "G-7HFYE6799H",
 };
+// var firebaseConfig = {
+//   apiKey: "AIzaSyCSAlM97c2AG4OXMtBmUNuSjecONPoUUlY",
+//   authDomain: "angularfire-20b5b.firebaseapp.com",
+//   databaseURL: "https://angularfire-20b5b.firebaseio.com",
+//   projectId: "angularfire-20b5b",
+//   storageBucket: "angularfire-20b5b.appspot.com",
+//   messagingSenderId: "652878430680",
+//   appId: "1:652878430680:web:538e31872a6f7d909032ad",
+// };
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterPractitionerComponent,
     DropZoneComponent,
+    LocationPickerComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyCcLZGjrULCMhRZLkRHAD-mO92j06Vidyk",
+      apiKey: "AIzaSyCo8sriDa73YNOci6Up_i9AbUMQ4sAyiP4",
+      // AIzaSyCcLZGjrULCMhRZLkRHAD-mO92j06Vidyk
+      libraries: ["places"],
     }),
     BrowserModule,
     AppRoutingModule,

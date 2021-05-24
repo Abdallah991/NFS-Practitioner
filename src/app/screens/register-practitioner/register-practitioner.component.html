@@ -272,13 +272,47 @@
 
           <!-- <div> -->
           <!-- TODO: need to add the location component -->
-          <agm-map [latitude]="lat" [longitude]="lng" [mapTypeId]="mapType">
-            <!-- <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker> -->
-          </agm-map>
+          <!-- [mapTypeControlOptions]="mapTypeControlOptions" -->
+
+          <!-- <div>
+            
+            <agm-map
+              [latitude]="lat"
+              [longitude]="lng"
+              [mapTypeControl]="true"
+              [zoom]="zoom"
+            >
+              <agm-marker
+                [latitude]="lat"
+                [longitude]="lng"
+                [markerDraggable]="true"
+                (dragEnd)="markerDragEnd($event)"
+              ></agm-marker>
+            </agm-map>
+          </div> -->
           <!-- </div> -->
-          <br />
-          <br />
+
           <div>
+            <label>Location </label>
+            <div class="location-container" (click)="openLocationDialog()">
+              <!-- <img *ngFor="let url of urls" [src]="url" alt="" /> -->
+              <!-- <input
+                type="file"
+                multiple
+                hidden
+                (change)="selectFiles($event)"
+                #fileInput
+              /> -->
+            </div>
+            <!-- <div *ngFor="let name of fileNames" class="file-list">
+              <img src="../../../assets/file.png" />
+              <p>{{ name }}</p>
+            </div> -->
+          </div>
+          <!--  -->
+          <br />
+          <br />
+          <div class="terms-conditions">
             <input type="checkbox" name="terms" class="terms-checkbox" />
             <label
               >By Applying you agree to the

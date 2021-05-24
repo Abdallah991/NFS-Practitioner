@@ -1,0 +1,34 @@
+<div class="map">
+  <div class="form-group">
+    <label *ngIf="searchable">Enter address</label>
+    <input
+      *ngIf="searchable"
+      type="text"
+      class="form-control input-container"
+      (keydown.enter)="$event.preventDefault()"
+      placeholder="Search Nearest Location"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="off"
+      type="text"
+      #search
+    />
+  </div>
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [mapTypeControl]="true"
+    [zoom]="zoom"
+  >
+    <agm-marker
+      [latitude]="lat"
+      [longitude]="lng"
+      [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"
+    ></agm-marker>
+  </agm-map>
+  <div class="map-controles">
+    <button (click)="cancelDialog()">Close</button>
+    <button (click)="ConfirmSelection()">Confirm</button>
+  </div>
+</div>

@@ -1,5 +1,14 @@
-import { ɵangular_packages_animations_browser_browser_a } from "@angular/animations/browser";
-import { Component, OnInit } from "@angular/core";
+import { MapsAPILoader, MouseEvent } from "@agm/core";
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+
+import {} from "googlemaps";
+
 import {
   FormBuilder,
   FormControl,
@@ -22,6 +31,8 @@ import {
 } from "src/app/constants/specialties";
 import { DropzoneService } from "src/app/services/dropzone.service";
 import { PractitionerService } from "src/app/services/practitioner.service";
+import { MatDialog } from "@angular/material/dialog";
+import { LocationPickerComponent } from "src/app/components/location-picker/location-picker.component";
 
 @Component({
   selector: "app-register-practitioner",
@@ -29,10 +40,9 @@ import { PractitionerService } from "src/app/services/practitioner.service";
   styleUrls: ["./register-practitioner.component.css"],
 })
 export class RegisterPractitionerComponent implements OnInit {
-  // Test coordinates
-  lat = 51.678418;
-  lng = 7.809007;
-  mapType = "satellite";
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+  address: string;
 
   msg;
   //patterns for input validation
@@ -43,14 +53,17 @@ export class RegisterPractitionerComponent implements OnInit {
   urls: any[] = [];
   //  certifications file names
   fileNames: string[] = [];
-  attachements: string;
+  attachements: any[] = [];
   //  form group declaration
   registerPractitioner: FormGroup;
   constructor(
     public fb: FormBuilder,
     private DrS: DropzoneService,
     private PS: PractitionerService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    public dialog: MatDialog
   ) {}
 
   submitted = false;
@@ -156,29 +169,7 @@ export class RegisterPractitionerComponent implements OnInit {
     return this.registerPractitioner.get("languages");
   }
 
-  async submitHandler() {
-    // console.log(
-    //   "The button was clicked onsubmit",
-    //   this.registerPractitioner.value
-    // );
-    // this.submitted = true;
-    // this.loadApplicantData();
-    // // log out the form and if its valid
-    // console.log(
-    //   this.registerPractitioner.value,
-    //   this.registerPractitioner.valid
-    // );
-    // if (this.registerPractitioner.valid) {
-    //   this.PS.uploadApplicant();
-    //   console.log("The button was clicked onhandler");
-    // } else {
-    //   console.log("the snack bar");
-    //   this._snackBar.open("Docter has been added", "Return to dashboard", {
-    //     duration: 10000,
-    //     panelClass: ["snackbar"],
-    //   });
-    // }
-  }
+  async submitHandler() {}
 
   // submit button implementation
   onSubmit() {
@@ -214,23 +205,29 @@ export class RegisterPractitionerComponent implements OnInit {
 
   // upload certificates
   selectFiles(event: any) {
+    console.log(event.target.files.length);
     if (event.target.files) {
-      for (let i = 0; i < File.length; i++) {
+      for (let i = 0; i < event.target.files.length; i++) {
         var reader = new FileReader();
-        // var attachment = this.fs
-        //   .readFileSync(event.target.files[i])
-        //   .toString("base64");
-        // console.log(attachment);
+
         reader.readAsDataURL(event.target.files[i]);
         this.fileNames.push(event.target.files[i].name);
+        let name = event.target.files[i].name;
+
         reader.onload = (event: any) => {
           this.urls.push(event.target.result);
-          this.attachements = event.target.result.toString("base64");
-          console.log(this.attachements);
-          this.sendEmail();
+          let attch = event.target.result;
+          this.attachements.push({
+            content: attch.replace(/^data:application\/pdf;base64,/, ""),
+            filename: name,
+            type: "application/pdf",
+            disposition: "attachment",
+          });
         };
       }
+      console.log(this.attachements);
 
+      setTimeout(() => this.sendEmail(this.attachements), 5000);
       console.log(this.fileNames);
     }
   }
@@ -306,32 +303,24 @@ export class RegisterPractitionerComponent implements OnInit {
     this.PS.certificateNames = this.fileNames;
   }
 
-  sendEmail() {
+  // send email implementation
+  sendEmail(attachements) {
     this.msg = {
       to: "abdallah@fthm.me",
       from: "abdallah@fthm.me",
       subject: "test",
       text: "body",
       html: "<h1> this is a test</h1>",
-      attachments: [
-        {
-          content: this.attachements,
-          filename: "atta",
-          type: "application/pdf",
-          disposition: "attachment",
-        },
-      ],
+      attachments: attachements,
     };
+    // types:
+    // plain/text
+    // application/pdf
 
     // send grid api key
     this.sgMail = sendgrid.setApiKey(
       "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"
     );
-
-    // "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"
-    //     echo "export SENDGRID_API_KEY='YSG.XPKP_LbbTrKI1lE68yvo8A.BryzuAsaB6G44ylsFJ5sQl-mpQsB8t9FYEImdl7Awpk'" > sendgrid.env
-    // echo "sendgrid.env" >> .gitignore
-    // source ./sendgrid.env
 
     // send gird send email code
     this.sgMail
@@ -344,4 +333,14 @@ export class RegisterPractitionerComponent implements OnInit {
         console.error(error);
       });
   }
+
+  openLocationDialog() {
+    this.dialog.open(LocationPickerComponent, {
+      maxHeight: "90vh",
+      width: "80vw",
+      maxWidth: "700px",
+    });
+  }
+
+  loadAttachements() {}
 }
