@@ -31,7 +31,7 @@ export class PractitionerService {
   countryCode = "";
   specialty = "";
   subCategory = "";
-  pricePerSession: number;
+  pricePerSession: number = 0;
   lat: number = 0;
   longt: number = 0;
   locationDescription: string = "";

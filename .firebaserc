@@ -1,5 +1,21 @@
 {
   "projects": {
     "default": "nfs-practitioner"
+  },
+  "targets": {
+    "nfs-practitioner": {
+      "hosting": {
+        "NFSPractioner3": [
+          "nfsapp-390d4"
+        ]
+      }
+    },
+    "nfsapp-390d4": {
+      "hosting": {
+        "NFSPractioner3": [
+          "http://www.admin.nfsapp.online"
+        ]
+      }
+    }
   }
 }

@@ -13,6 +13,8 @@ import { MatDialogModule, MatDialog } from "@angular/material/dialog";
 import { AgmCoreModule } from "@agm/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LocationPickerComponent } from "./components/location-picker/location-picker.component";
+import { HttpClientModule } from '@angular/common/http';
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyDpZ8iww9uPG0gnqA0yHO9gZlBP6nttXuc",
@@ -57,6 +59,8 @@ var firebaseConfig = {
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatDialogModule,
+    HttpClientModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

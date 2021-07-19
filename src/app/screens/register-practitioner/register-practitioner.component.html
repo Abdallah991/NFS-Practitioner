@@ -39,17 +39,6 @@
               required
             />
 
-            <!-- <span
-              class="error-message"
-              *ngIf="
-                (firstName.touched || firstName.dirty) &&
-                firstName.invalid &&
-                firstName.errors.required
-              "
-            >
-              **</span
-            > -->
-
             <br />
             <br />
             <label for="fname">Last name</label>
@@ -113,9 +102,9 @@
               >
                 <option
                   *ngFor="let countrycode of countryCodes"
-                  value="{{ countrycode }}"
+                  value="{{ countrycode.code }}"
                 >
-                  {{ countrycode }}
+                  {{ countrycode.name }}
                 </option>
               </select>
             </div>
@@ -215,7 +204,7 @@
               </span> </label
             ><br />
             <input
-              type="tel"
+              type="number"
               name="pricePerSession"
               class="textbox-bottom"
               formControlName="pricePerSession"

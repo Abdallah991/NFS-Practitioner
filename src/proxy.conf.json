@@ -1,0 +1,11 @@
+{
+  "http://localhost:4200/api/*": {
+    "target": "https://api.sendgrid.com/v3/mail/send",
+    "logLevel": "debug",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

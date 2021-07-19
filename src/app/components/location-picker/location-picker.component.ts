@@ -57,9 +57,6 @@ export class LocationPickerComponent implements OnInit {
             this.lat = place.geometry.location.lat();
             this.lng = place.geometry.location.lng();
             this.zoom = 16;
-
-            this.practitionerService.lat = this.lat;
-            this.practitionerService.longt = this.lng;
           });
         });
       }
@@ -73,10 +70,7 @@ export class LocationPickerComponent implements OnInit {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.zoom = 16;
-        this.practitionerService.lat = this.lat;
-        this.practitionerService.longt = this.lng;
-        console.log("Latitude", this.lat);
-        console.log("Longitude", this.lng);
+
         this.getAddress(this.lat, this.lng);
       });
     }
@@ -86,10 +80,7 @@ export class LocationPickerComponent implements OnInit {
     console.log($event);
     this.lat = $event.coords.lat;
     this.lng = $event.coords.lng;
-    console.log("Latitude", this.lat);
-    console.log("Longitude", this.lng);
-    this.practitionerService.lat = this.lat;
-    this.practitionerService.longt = this.lng;
+
     this.getAddress(this.lat, this.lng);
   }
 
@@ -117,5 +108,16 @@ export class LocationPickerComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  ConfirmSelection() {}
+  ConfirmSelection() {
+    this.practitionerService.lat = this.lat;
+    this.practitionerService.longt = this.lng;
+    console.log(
+      "the coordinates are",
+      " the latitude" +
+        this.practitionerService.lat +
+        " the longtitude" +
+        this.practitionerService.longt
+    );
+    this.dialog.closeAll();
+  }
 }

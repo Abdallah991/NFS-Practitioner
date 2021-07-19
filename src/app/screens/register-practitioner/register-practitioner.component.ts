@@ -1,4 +1,4 @@
-import { MapsAPILoader, MouseEvent } from "@agm/core";
+import { MapsAPILoader } from "@agm/core";
 import {
   Component,
   ElementRef,
@@ -33,6 +33,8 @@ import { DropzoneService } from "src/app/services/dropzone.service";
 import { PractitionerService } from "src/app/services/practitioner.service";
 import { MatDialog } from "@angular/material/dialog";
 import { LocationPickerComponent } from "src/app/components/location-picker/location-picker.component";
+import { expressionType } from "@angular/compiler/src/output/output_ast";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
   selector: "app-register-practitioner",
@@ -44,11 +46,15 @@ export class RegisterPractitionerComponent implements OnInit {
   public searchElementRef: ElementRef;
   address: string;
 
+  //  app = express()
+  // app.use(cors());
+
   msg;
   //patterns for input validation
   stringPattern = "[a-zA-Z ]*";
   numberPattern = /\-?\d*\.?\d{1,2}/;
-  emailPattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+  emailPattern =
+    /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
   //  urls for certifications
   urls: any[] = [];
   //  certifications file names
@@ -63,7 +69,8 @@ export class RegisterPractitionerComponent implements OnInit {
     private appComponent: AppComponent,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: HttpClient
   ) {}
 
   submitted = false;
@@ -81,10 +88,17 @@ export class RegisterPractitionerComponent implements OnInit {
   sgMail = require("@sendgrid/mail");
   fs = require("fs");
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.DrS.image = "";
     this.DrS.size = "150px";
     //  form group initialization
+
+    // testing API calls
+    //  let httpcall = await this.http.get('https://www.passwordrandom.com/query?command=password').subscribe(val => {
+    //   console.log(val, 'this is the resposne ');
+
+    //  });
+    //  console.log(httpcall, 'this is the resposne ');
 
     this.registerPractitioner = this.fb.group({
       specialty: [this.specialties[0], [Validators.required]],
@@ -172,6 +186,17 @@ export class RegisterPractitionerComponent implements OnInit {
   async submitHandler() {}
 
   // submit button implementation
+  /**
+   * @module checkout
+   * @author Abdallah Alathamneh
+   * @description Adding the information needed to complete the orders (address, date, time, payment method)
+   * Payment integration
+   * sending the order to the backend
+   * @date 24/12/2020
+   * @version 1.0.0
+   * @date 26/04/2021
+   * @version 2.0.0
+   */
   onSubmit() {
     console.log(
       "The button was clicked onsubmit",
@@ -192,6 +217,7 @@ export class RegisterPractitionerComponent implements OnInit {
         "Please fill the missing information"
       );
     }
+    this.sendEmail(this.attachements);
   }
 
   // upload practitioner image
@@ -226,10 +252,27 @@ export class RegisterPractitionerComponent implements OnInit {
         };
       }
       console.log(this.attachements);
-
       setTimeout(() => this.sendEmail(this.attachements), 5000);
       console.log(this.fileNames);
     }
+
+    // calling the cloud function from the app
+
+    let url = `https://us-central1-nhsc-edd5c.cloudfunctions.net/proceedOrder`;
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    });
+
+    this.http
+      .post(
+        "https://us-central1-nfsapp-390d4.cloudfunctions.net/sendCertificates",
+        { data: "test" },
+        { headers: headers }
+      )
+      .subscribe((data) => {
+        console.log("data", data);
+      });
   }
 
   // select title
@@ -241,6 +284,7 @@ export class RegisterPractitionerComponent implements OnInit {
 
   // select country code
   changeCountryCode(e) {
+    console.log(e.target.value);
     this.countryCode.setValue(e.target.value, {
       onlySelf: true,
     });
@@ -305,6 +349,21 @@ export class RegisterPractitionerComponent implements OnInit {
 
   // send email implementation
   sendEmail(attachements) {
+    // body of the message
+    let htmlSendEmail =
+      "<h3> Hello NFS team,</h3>" +
+      "<br>" +
+      "<p> Please find my certificates attaches below</p>";
+    // subject and sender email
+    let subject =
+      "Certificates and licenses for " +
+      this.title.value +
+      " " +
+      this.firstName.value +
+      " " +
+      this.lastName.value;
+    let senderEmail = this.email.value;
+
     this.msg = {
       to: "abdallah@fthm.me",
       from: "abdallah@fthm.me",
@@ -313,25 +372,21 @@ export class RegisterPractitionerComponent implements OnInit {
       html: "<h1> this is a test</h1>",
       attachments: attachements,
     };
-    // types:
-    // plain/text
-    // application/pdf
 
-    // send grid api key
     this.sgMail = sendgrid.setApiKey(
       "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"
     );
 
     // send gird send email code
-    this.sgMail
-      .send(this.msg)
-      .then((response) => {
-        console.log(response[0].statusCode);
-        console.log(response[0].headers);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // this.sgMail
+    //   .send(this.msg)
+    //   .then((response) => {
+    //     console.log(response);
+    //     console.log("the header are", response[0].headers);
+    //   })
+    //   .catch((error) => {
+    //     // console.error(error);
+    //   });
   }
 
   openLocationDialog() {
