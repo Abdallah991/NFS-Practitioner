@@ -283,7 +283,8 @@
 
           <div>
             <label>Location </label>
-            <div class="location-container" (click)="openLocationDialog()">
+            <div *ngIf="lat == 0" class="location-container" (click)="openLocationDialog()">
+              
               <!-- <img *ngFor="let url of urls" [src]="url" alt="" /> -->
               <!-- <input
                 type="file"
@@ -292,6 +293,8 @@
                 (change)="selectFiles($event)"
                 #fileInput
               /> -->
+            </div>
+            <div *ngIf="lat != 0" class="location-container-complete" (click)="openLocationDialog()">  
             </div>
             <!-- <div *ngFor="let name of fileNames" class="file-list">
               <img src="../../../assets/file.png" />

@@ -13,8 +13,7 @@ import { MatDialogModule, MatDialog } from "@angular/material/dialog";
 import { AgmCoreModule } from "@agm/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LocationPickerComponent } from "./components/location-picker/location-picker.component";
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule } from "@angular/common/http";
 
 var firebaseConfig = {
   apiKey: "AIzaSyDpZ8iww9uPG0gnqA0yHO9gZlBP6nttXuc",
@@ -45,7 +44,7 @@ var firebaseConfig = {
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyCo8sriDa73YNOci6Up_i9AbUMQ4sAyiP4",
+      apiKey: "AIzaSyDpZ8iww9uPG0gnqA0yHO9gZlBP6nttXuc",
       // AIzaSyCcLZGjrULCMhRZLkRHAD-mO92j06Vidyk
       libraries: ["places"],
     }),
@@ -59,8 +58,7 @@ var firebaseConfig = {
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatDialogModule,
-    HttpClientModule
-    
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
