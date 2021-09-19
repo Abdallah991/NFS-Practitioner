@@ -1,3 +1,4 @@
+import { SuccessComponent } from './../../components/success/success.component';
 import { MapsAPILoader } from "@agm/core";
 import {
   Component,
@@ -131,6 +132,7 @@ export class RegisterPractitionerComponent implements OnInit {
       countryCode: [this.countryCodes[0], [Validators.required]],
       languages: [this.Languages[0], [Validators.required]],
       subCategory: [""],
+      linkedIn: [""],
     });
   }
 
@@ -183,7 +185,13 @@ export class RegisterPractitionerComponent implements OnInit {
     return this.registerPractitioner.get("languages");
   }
 
-  async submitHandler() {}
+  get Linkin() {
+    return this.registerPractitioner.get("linkedIn");
+  }
+
+  async submitHandler() {
+
+  }
 
   // submit button implementation
   /**
@@ -210,14 +218,24 @@ export class RegisterPractitionerComponent implements OnInit {
       this.registerPractitioner.valid
     );
     if (this.registerPractitioner.valid) {
-      this.PS.uploadApplicant();
-      console.log("The button was clicked onhandler");
+      this.PS.uploadApplicant().then(
+        ()=>{
+          this.sendEmail(this.attachements);
+          this.dialog
+          .open(SuccessComponent, {
+            maxHeight: "484px",
+            width: "80vw",
+            maxWidth: "700px",
+          });
+        }
+      );
+
     } else {
       this.appComponent.openFailureSnackBar(
         "Please fill the missing information"
       );
     }
-    this.sendEmail(this.attachements);
+    
   }
 
   // upload practitioner image
@@ -345,6 +363,7 @@ export class RegisterPractitionerComponent implements OnInit {
     this.PS.languages = this.languages.value;
     this.PS.locationName = this.locationName.value;
     this.PS.certificateNames = this.fileNames;
+    this.PS.linkedIn = this.Linkin.value;
   }
 
   // send email implementation

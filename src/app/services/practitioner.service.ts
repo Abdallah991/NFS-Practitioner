@@ -40,6 +40,7 @@ export class PractitionerService {
   locationName: string = "";
   languages: string = "";
   imagePath: string = "";
+  linkedIn: string = ""; 
 
   constructor(
     private storage: AngularFireStorage,
@@ -72,6 +73,7 @@ export class PractitionerService {
           locationName: this.locationName,
           id: "",
           imagePath: this.imagePath,
+          linkedIn: this.linkedIn
         })
         .then(async (res) => {
           console.log("the result from Firebase", res.id);

@@ -14,6 +14,7 @@ import { AgmCoreModule } from "@agm/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LocationPickerComponent } from "./components/location-picker/location-picker.component";
 import { HttpClientModule } from "@angular/common/http";
+import { SuccessComponent } from './components/success/success.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyDpZ8iww9uPG0gnqA0yHO9gZlBP6nttXuc",
@@ -41,6 +42,10 @@ var firebaseConfig = {
     RegisterPractitionerComponent,
     DropZoneComponent,
     LocationPickerComponent,
+    SuccessComponent,
+  ],
+  entryComponents: [
+    SuccessComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

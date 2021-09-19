@@ -1,0 +1,26 @@
+.button {
+    background-color: #6f62a9;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Poppins";
+    cursor: pointer;
+    border-radius: 20px;
+    width: 180px;
+    height: 40px;
+    /* margin: 5% 30%; */
+  }
+
+  .successMessage{
+      display: flex;
+      flex-direction: column;
+      padding-top: 90px;
+      padding-bottom: 90px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }

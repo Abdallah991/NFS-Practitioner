@@ -17,11 +17,7 @@
             <label>Title</label>
             <br />
 
-            <select
-              class="selectbox textbox-top"
-              formControlName="title"
-              (change)="changeTitle($event)"
-            >
+            <select class="selectbox textbox-top" formControlName="title" (change)="changeTitle($event)">
               <option *ngFor="let title of titles">
                 {{ title }}
               </option>
@@ -31,24 +27,13 @@
             <br />
 
             <label>First name</label>
-            <input
-              type="text"
-              name="firstName"
-              class="textbox-top"
-              formControlName="firstName"
-              required
-            />
+            <input type="text" name="firstName" class="textbox-top" formControlName="firstName" required />
 
             <br />
             <br />
             <label for="fname">Last name</label>
             <br />
-            <input
-              type="text"
-              name="lastName"
-              class="textbox-top"
-              formControlName="lastName"
-            />
+            <input type="text" name="lastName" class="textbox-top" formControlName="lastName" />
 
             <br />
             <br />
@@ -56,13 +41,7 @@
             <br />
             <div *ngFor="let gender of genders" class="gender-selection">
               <label>
-                <input
-                  value="{{ gender }}"
-                  type="radio"
-                  name="gender"
-                  class="gender-radio"
-                  formControlName="gender"
-                />
+                <input value="{{ gender }}" type="radio" name="gender" class="gender-radio" formControlName="gender" />
                 {{ gender }}
               </label>
             </div>
@@ -83,53 +62,29 @@
         <div class="bottom-fields">
           <div>
             <label>Email</label><br />
-            <input
-              type="email"
-              name="Email"
-              class="textbox-bottom"
-              formControlName="email"
-            />
+            <input type="email" name="Email" class="textbox-bottom" formControlName="email" />
           </div>
 
           <br />
           <div class="phone-container">
             <div class="country-code">
               <label for="fname">Phone</label><br />
-              <select
-                class="selectbox textbox-bottom"
-                name="countryCode"
-                (change)="changeCountryCode($event)"
-              >
-                <option
-                  *ngFor="let countrycode of countryCodes"
-                  value="{{ countrycode.code }}"
-                >
+              <select class="selectbox textbox-bottom" name="countryCode" (change)="changeCountryCode($event)">
+                <option *ngFor="let countrycode of countryCodes" value="{{ countrycode.code }}">
                   {{ countrycode.name }}
                 </option>
               </select>
             </div>
             <div class="phone-number">
               <br />
-              <input
-                type="number"
-                name="Email"
-                class="textbox-bottom"
-                formControlName="phone"
-              />
+              <input type="number" name="Email" class="textbox-bottom" formControlName="phone" />
             </div>
           </div>
           <br />
           <div>
             <label>Specialty</label><br />
-            <select
-              class="selectbox textbox-bottom"
-              formControlName="specialty"
-              (change)="changeSpecialty($event)"
-            >
-              <option
-                *ngFor="let speciality of specialties"
-                value="{{ speciality }}"
-              >
+            <select class="selectbox textbox-bottom" formControlName="specialty" (change)="changeSpecialty($event)">
+              <option *ngFor="let speciality of specialties" value="{{ speciality }}">
                 {{ speciality }}
               </option>
             </select>
@@ -137,107 +92,65 @@
           <br />
           <div *ngIf="showSubCategories">
             <label>Sub-Categories</label><br />
-            <select
-              class="selectbox textbox-bottom"
-              formControlName="subCategory"
-              (change)="changeSubCategory($event)"
-            >
-              <option
-                *ngFor="let subCategory of subCategories"
-                value="{{ subCategory }}"
-              >
+            <select class="selectbox textbox-bottom" formControlName="subCategory" (change)="changeSubCategory($event)">
+              <option *ngFor="let subCategory of subCategories" value="{{ subCategory }}">
                 {{ subCategory }}
               </option>
             </select>
           </div>
           <br />
           <div>
-            <label
-              >Experience
-              <span class="input-note"
-                >*No more than 500 characters recommended.</span
-              > </label
-            ><br />
-            <textarea
-              class="largetextbox"
-              rows="3"
-              formControlName="experience"
-              maxlength="500"
-            ></textarea>
+            <label>Experience
+              <span class="input-note">*No more than 500 characters recommended.</span> </label><br />
+            <textarea class="largetextbox" rows="3" formControlName="experience" maxlength="500"></textarea>
           </div>
           <br />
           <div>
-            <label
-              >About
-              <span class="input-note"
-                >*No more than 500 characters recommended.</span
-              > </label
-            ><br />
-            <textarea
-              class="largetextbox"
-              rows="3"
-              formControlName="about"
-              maxlength="500"
-            ></textarea>
+            <label>About
+              <span class="input-note">*No more than 500 characters recommended.</span> </label><br />
+            <textarea class="largetextbox" rows="3" formControlName="about" maxlength="500"></textarea>
           </div>
           <br />
           <div>
-            <label
-              >Education
-              <span class="input-note"
-                >*No more than 500 characters recommended.</span
-              > </label
-            ><br />
-            <textarea
-              class="largetextbox"
-              rows="3"
-              formControlName="education"
-              maxlength="500"
-            ></textarea>
+            <label>Education
+              <span class="input-note">*No more than 500 characters recommended.</span> </label><br />
+            <textarea class="largetextbox" rows="3" formControlName="education" maxlength="500"></textarea>
           </div>
           <br />
           <div>
-            <label
-              >Price Per Session
+            <label>Starting Price
               <span class="input-note">
-                *This will not be displayed in the app.
-              </span> </label
-            ><br />
-            <input
-              type="number"
-              name="pricePerSession"
-              class="textbox-bottom"
-              formControlName="pricePerSession"
-            />
+                *This will not be displayed in the app and excludes add ons through the session.
+              </span> </label><br />
+            <input type="number" name="pricePerSession" class="textbox-bottom" formControlName="pricePerSession" />
           </div>
           <br />
           <div>
             <br />
             <label>Languages</label><br />
-            <select
-              class="selectbox textbox-bottom"
-              name="languages"
-              formControlName="languages"
-              (change)="changeLanguage($event)"
-            >
+            <select class="selectbox textbox-bottom" name="languages" formControlName="languages"
+              (change)="changeLanguage($event)">
               <option *ngFor="let language of Languages" value="{{ language }}">
                 {{ language }}
               </option>
             </select>
           </div>
           <br />
+
+          <div>
+            <label>Linked In <span class="input-note">
+                *Optional. This will not be highlighted in the app.
+              </span> </label><br />
+            <input type="linkedIn" name="linkedIn" class="textbox-bottom" formControlName="linkedIn" />
+          </div>
+          <br />
+
           <!-- upload certificates -->
           <div>
             <label>Certification and licenses </label>
             <div class="uploadfilecontainer2" (click)="fileInput.click()">
               <!-- <img *ngFor="let url of urls" [src]="url" alt="" /> -->
-              <input
-                type="file"
-                multiple
-                hidden
-                (change)="selectFiles($event)"
-                #fileInput
-              />
+              <input type="file" multiple hidden (change)="selectFiles($event)" #fileInput />
             </div>
             <div *ngFor="let name of fileNames" class="file-list">
               <img src="../../../assets/file.png" />
@@ -252,11 +165,7 @@
 
           <div>
             <label>Location name </label><br />
-            <input
-              type="text"
-              class="textbox-bottom"
-              formControlName="locationName"
-            />
+            <input type="text" class="textbox-bottom" formControlName="locationName" />
           </div>
 
           <!-- <div> -->
@@ -284,7 +193,7 @@
           <div>
             <label>Location </label>
             <div *ngIf="lat == 0" class="location-container" (click)="openLocationDialog()">
-              
+
               <!-- <img *ngFor="let url of urls" [src]="url" alt="" /> -->
               <!-- <input
                 type="file"
@@ -294,7 +203,7 @@
                 #fileInput
               /> -->
             </div>
-            <div *ngIf="lat != 0" class="location-container-complete" (click)="openLocationDialog()">  
+            <div *ngIf="lat != 0" class="location-container-complete" (click)="openLocationDialog()">
             </div>
             <!-- <div *ngFor="let name of fileNames" class="file-list">
               <img src="../../../assets/file.png" />
@@ -306,22 +215,14 @@
           <br />
           <div class="terms-conditions">
             <input type="checkbox" name="terms" class="terms-checkbox" />
-            <label
-              >By Applying you agree to the
+            <label>By Applying you agree to the
               <a href="https://www.nfsapp.online/legal/" target="_blank">
-                <span class="terms-link">terms and conditions</span></a
-              >
-              and guarantee that all the information is true and valid.</label
-            >
+                <span class="terms-link">terms and conditions</span></a>
+              and guarantee that all the information is true and valid.</label>
           </div>
           <br />
           <br />
-          <button
-            type="submit"
-            [disabled]="registerPractitioner.invalid"
-            class="button"
-            (click)="submitHandler()"
-          >
+          <button type="submit" [disabled]="registerPractitioner.invalid" class="button" (click)="submitHandler()">
             Submit
           </button>
         </div>
