@@ -1,4 +1,5 @@
 export const SPECIALTIES = [
+  "",
   "Psychology",
   "Psychiatry",
   "Behavioral Therapy",
@@ -9,6 +10,7 @@ export const SPECIALTIES = [
 ];
 
 export const SUB_CATEGORIES_ALTERNATIVE = [
+  "",
   "Music Therapy",
   "Play Therapy",
   "Art Therapy",
@@ -20,4 +22,8 @@ export const SUB_CATEGORIES_ALTERNATIVE = [
   "Other",
 ];
 
-export const SUB_CATEGORIES_BEHAVRIORAL = ["ABA Therapy"];
+export const SUB_CATEGORIES_BEHAVRIORAL = ["", "ABA Therapy"];
+
+export const FREELANCER_CENTER = ["", "Freelancer", "Center", "Both"];
+
+export const TYPEOFAPPOINTMENT = ["", "Virtual", "Face-To-Face", "Both"];

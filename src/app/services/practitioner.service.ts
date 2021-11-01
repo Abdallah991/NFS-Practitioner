@@ -40,7 +40,10 @@ export class PractitionerService {
   locationName: string = "";
   languages: string = "";
   imagePath: string = "";
-  linkedIn: string = ""; 
+  linkedIn: string = "";
+  typeOfAppointmentfield: string = "";
+  freelancerCenterfield: string = "";
+  blogwall: boolean = false;
 
   constructor(
     private storage: AngularFireStorage,
@@ -73,7 +76,10 @@ export class PractitionerService {
           locationName: this.locationName,
           id: "",
           imagePath: this.imagePath,
-          linkedIn: this.linkedIn
+          linkedIn: this.linkedIn,
+          typeOfAppointment: this.typeOfAppointmentfield,
+          freelancerCenterfield: this.freelancerCenterfield,
+          blogwall: this.blogwall,
         })
         .then(async (res) => {
           console.log("the result from Firebase", res.id);

@@ -185,6 +185,10 @@ label {
   margin-left: 10px;
 }
 
+.reg-details {
+  font-size: 9.5pt;
+}
+
 /* terms and conditions link */
 .terms-link {
   font-size: 12pt;

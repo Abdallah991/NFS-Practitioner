@@ -1,4 +1,4 @@
-import { SuccessComponent } from './../../components/success/success.component';
+import { SuccessComponent } from "./../../components/success/success.component";
 import { MapsAPILoader } from "@agm/core";
 import {
   Component,
@@ -29,6 +29,8 @@ import {
   SPECIALTIES,
   SUB_CATEGORIES_ALTERNATIVE,
   SUB_CATEGORIES_BEHAVRIORAL,
+  TYPEOFAPPOINTMENT,
+  FREELANCER_CENTER,
 } from "src/app/constants/specialties";
 import { DropzoneService } from "src/app/services/dropzone.service";
 import { PractitionerService } from "src/app/services/practitioner.service";
@@ -85,6 +87,9 @@ export class RegisterPractitionerComponent implements OnInit {
   showSubCategories = false;
   Languages = LANGUAGES;
   filesAvailable: boolean = false;
+
+  typeOfAppointment = TYPEOFAPPOINTMENT;
+  freelancerCenter = FREELANCER_CENTER;
   // Send Grid code
   sgMail = require("@sendgrid/mail");
   fs = require("fs");
@@ -96,10 +101,7 @@ export class RegisterPractitionerComponent implements OnInit {
 
     // testing API calls
     //  let httpcall = await this.http.get('https://www.passwordrandom.com/query?command=password').subscribe(val => {
-    //   console.log(val, 'this is the resposne ');
-
     //  });
-    //  console.log(httpcall, 'this is the resposne ');
 
     this.registerPractitioner = this.fb.group({
       specialty: [this.specialties[0], [Validators.required]],
@@ -133,6 +135,10 @@ export class RegisterPractitionerComponent implements OnInit {
       languages: [this.Languages[0], [Validators.required]],
       subCategory: [""],
       linkedIn: [""],
+      terms: [null, [Validators.required]],
+      typeOfAppointmentfield: ["", [Validators.required]],
+      freelancerCenterfield: ["", [Validators.required]],
+      blogwall: [false],
     });
   }
 
@@ -189,9 +195,23 @@ export class RegisterPractitionerComponent implements OnInit {
     return this.registerPractitioner.get("linkedIn");
   }
 
-  async submitHandler() {
-
+  get terms() {
+    return this.registerPractitioner.get("terms");
   }
+
+  get typeOfAppointmentfield() {
+    return this.registerPractitioner.get("typeOfAppointmentfield");
+  }
+
+  get freelancerCenterfield() {
+    return this.registerPractitioner.get("freelancerCenterfield");
+  }
+
+  get blogwall() {
+    return this.registerPractitioner.get("blogwall");
+  }
+
+  async submitHandler() {}
 
   // submit button implementation
   /**
@@ -206,36 +226,31 @@ export class RegisterPractitionerComponent implements OnInit {
    * @version 2.0.0
    */
   onSubmit() {
-    console.log(
-      "The button was clicked onsubmit",
-      this.registerPractitioner.value
-    );
-    this.submitted = true;
-    this.loadApplicantData();
-    // log out the form and if its valid
-    console.log(
-      this.registerPractitioner.value,
-      this.registerPractitioner.valid
-    );
-    if (this.registerPractitioner.valid) {
-      this.PS.uploadApplicant().then(
-        ()=>{
+    console.log(this.terms.value);
+
+    if (this.terms.value == true) {
+      this.submitted = true;
+      this.loadApplicantData();
+
+      if (this.registerPractitioner.valid) {
+        this.PS.uploadApplicant().then(() => {
           this.sendEmail(this.attachements);
-          this.dialog
-          .open(SuccessComponent, {
+          this.dialog.open(SuccessComponent, {
             maxHeight: "484px",
             width: "80vw",
             maxWidth: "700px",
           });
-        }
-      );
-
+        });
+      } else {
+        this.appComponent.openFailureSnackBar(
+          "Please fill the missing information"
+        );
+      }
     } else {
       this.appComponent.openFailureSnackBar(
-        "Please fill the missing information"
+        "Please agree to the terms and conditions to continue"
       );
     }
-    
   }
 
   // upload practitioner image
@@ -269,28 +284,7 @@ export class RegisterPractitionerComponent implements OnInit {
           });
         };
       }
-      console.log(this.attachements);
-      setTimeout(() => this.sendEmail(this.attachements), 5000);
-      console.log(this.fileNames);
     }
-
-    // calling the cloud function from the app
-
-    let url = `https://us-central1-nhsc-edd5c.cloudfunctions.net/proceedOrder`;
-    let headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    });
-
-    this.http
-      .post(
-        "https://us-central1-nfsapp-390d4.cloudfunctions.net/sendCertificates",
-        { data: "test" },
-        { headers: headers }
-      )
-      .subscribe((data) => {
-        console.log("data", data);
-      });
   }
 
   // select title
@@ -364,6 +358,9 @@ export class RegisterPractitionerComponent implements OnInit {
     this.PS.locationName = this.locationName.value;
     this.PS.certificateNames = this.fileNames;
     this.PS.linkedIn = this.Linkin.value;
+    this.PS.typeOfAppointmentfield = this.typeOfAppointmentfield.value;
+    this.PS.freelancerCenterfield = this.freelancerCenterfield.value;
+    this.PS.blogwall = this.blogwall.value;
   }
 
   // send email implementation
@@ -384,19 +381,34 @@ export class RegisterPractitionerComponent implements OnInit {
     let senderEmail = this.email.value;
 
     this.msg = {
-      to: "abdallah@fthm.me",
-      from: "abdallah@fthm.me",
+      to: "abdulla@fthm.me",
+      from: "abdulla@fthm.me",
       subject: "test",
       text: "body",
       html: "<h1> this is a test</h1>",
       attachments: attachements,
     };
 
-    this.sgMail = sendgrid.setApiKey(
-      "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"
-    );
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    });
 
-    // send gird send email code
+    this.http
+      .post(
+        "https://us-central1-nfsapp-390d4.cloudfunctions.net/sendCertificates",
+        { data: this.msg },
+        { headers: headers }
+      )
+      .subscribe((data) => {
+        console.log("data", data);
+      });
+
+    // this.sgMail = sendgrid.setApiKey(
+    //   "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"
+    // );
+
+    // // send gird send email code
     // this.sgMail
     //   .send(this.msg)
     //   .then((response) => {
@@ -404,7 +416,7 @@ export class RegisterPractitionerComponent implements OnInit {
     //     console.log("the header are", response[0].headers);
     //   })
     //   .catch((error) => {
-    //     // console.error(error);
+    //     console.error(error);
     //   });
   }
 

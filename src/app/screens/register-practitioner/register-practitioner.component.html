@@ -1,8 +1,15 @@
 <div class="page-container">
   <div class="sidebox">
     <div>
+      <br>
       <form [formGroup]="registerPractitioner" (ngSubmit)="onSubmit()">
         <h1 class="center-align">Register as Practitioner!</h1>
+        <br>
+        <label><span class="reg-details">Thank you for your interest in becoming a featured “subscriber” onto the nfs app and being that first step towards eliminating the mental health stigma in the Middle East. Your first 8 months is a free trial, then we will be charging 20 BD monthly (Bahraini Dinar) per head.
+          Please Fill in your details below. Once completed, a background check will be performed to ensure your eligibility to be a part of nfs. Please attach a photo of yourself using jpeg (this photo will be featured onto your app profile).</span></label>
+
+
+
         <!-- top view -->
         <div class="top-view">
           <!-- Image upload -->
@@ -95,6 +102,27 @@
             <select class="selectbox textbox-bottom" formControlName="subCategory" (change)="changeSubCategory($event)">
               <option *ngFor="let subCategory of subCategories" value="{{ subCategory }}">
                 {{ subCategory }}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div>
+            <label>Are you applying as a freelancer or as a center ?</label><br />
+            <select class="selectbox textbox-bottom" formControlName="freelancerCenterfield" >
+              <option *ngFor="let item of freelancerCenter" value="{{ item }}">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div>
+            <label>What type of appointment would you like to register for:  <span class="input-note">
+              (Although we are planning as a future feature for virtual sessions to be conducted through the app, 
+              currently it will be conducted through your own sources such as Whatsapp, Zoom and/or Facetime.)
+            </span></label><br />
+            <select class="selectbox textbox-bottom" formControlName="typeOfAppointmentfield" >
+              <option *ngFor="let item of typeOfAppointment" value="{{ item }}">
+                {{ item }}
               </option>
             </select>
           </div>
@@ -214,7 +242,12 @@
           <br />
           <br />
           <div class="terms-conditions">
-            <input type="checkbox" name="terms" class="terms-checkbox" />
+            <input type="checkbox" name="terms" class="terms-checkbox" formControlName="blogwall" />
+            <label>Would you like to post your articles posted on the “Blog Wall” of the app?</label>
+          </div>
+          <br />
+          <div class="terms-conditions">
+            <input type="checkbox" name="terms" class="terms-checkbox" formControlName="terms" />
             <label>By Applying you agree to the
               <a href="https://www.nfsapp.online/legal/" target="_blank">
                 <span class="terms-link">terms and conditions</span></a>
